@@ -18,7 +18,9 @@
 	<title>Harder.DEV</title>
     <link rel="canonical" href="https://harder.dev">
 
-	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/dd06edf683.js" crossorigin="anonymous"></script>
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-93562-11"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
@@ -26,15 +28,103 @@
 		gtag('js', new Date());
 		gtag('config', 'UA-93562-11');
 	</script>
-
 </head>
 <body>
-	<h1>Harder.DEV</h1>
 
+	<a class="navbar-brand" href="#">Navbar</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+	  <span class="navbar-toggler-icon"></span>
+	</button>
+  
+	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+	  <ul class="navbar-nav mr-auto">
+		<li class="nav-item active">
+		  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+		</li>
+		<li class="nav-item">
+		  <a class="nav-link" href="#">Link</a>
+		</li>
+		<li class="nav-item">
+		  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+		</li>
+		<li class="nav-item dropdown">
+		  <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+		  <div class="dropdown-menu" aria-labelledby="dropdown01">
+			<a class="dropdown-item" href="#">Action</a>
+			<a class="dropdown-item" href="#">Another action</a>
+			<a class="dropdown-item" href="#">Something else here</a>
+		  </div>
+		</li>
+	  </ul>
+	</div>
+  </nav>
 
-	<p>
-		Crafted apps, sites, and services for your connected internet.
-	</p>
+	<main role="main">
+		<div class="jumbotron">
+			<div class="container">
+				<h1 class="display-3">Harder.DEV</h1>
+				<p>Crafted apps, sites, and services for your connected internet.</p>
+				<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+			</div>
+		</div>
 
+		<div class="container">
+
+			<div class="row">
+				<div class="col-md-4">
+					<div class="card mb-4 shadow-sm">
+						<div class="card-header">
+							<img src="img/puzzle.png" alt="Austin Puzzle Exchange" title="Austin Puzzle Exchange" />
+						</div>
+						<div class="card-body">
+							<h5 class="card-title">Voice First Apps &amp; Skills</h5>
+							<p class="card-text">We are experts at building voice-first apps and integrations with an intuitive visual UI for AI virtual assistants such as Amazon Alexa, Google Assistant, and Microsoft Cortana.</p>
+							<div class="d-flex justify-content-between align-items-center">
+								<a class="btn btn-secondary" href="#" role="button">Learn more &raquo;</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-4">
+					<div class="card mb-4 shadow-sm">
+						<div class="card-header">
+							<img src="img/puzzle.png" alt="Austin Puzzle Exchange" title="Austin Puzzle Exchange" />
+						</div>
+						<div class="card-body">
+							<h5 class="card-title">Austin Puzzle Exchange</h5>
+							<p class="card-text">The Austin Puzzle Exchange is a neighborhood puzzle exchange that builds community and encourages a love of puzzles.</p>
+							<div class="d-flex justify-content-between align-items-center">
+								<a class="btn btn-secondary" href="https://austinpuzzles.com" target="_new" role="button">Visit site &raquo;</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4">
+					<h2>Heading</h2>
+					<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+					<p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+				</div>
+				<div class="col-md-4">
+					<h2>Heading</h2>
+					<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+					<p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+				</div>
+				<div class="col-md-4">
+					<h2>Heading</h2>
+					<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+					<p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+				</div>
+			</div>
+			<hr>
+		</div>
+	</main>
+
+	<footer class="container">
+		<p>&copy; Harder.DEV 2020</p>
+	</footer>
 </body>
 </html>
