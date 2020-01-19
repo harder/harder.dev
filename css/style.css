@@ -1,28 +1,18 @@
 
-body {
-    padding-top: 3.5rem;
+
+
+.profile_image {
+    border-radius: 50%;
+    width: 50%;
+    filter: grayscale(1);
+    padding: 10px;
   }
-
-.header {
-    background: url('../img/header.png') center center no-repeat scroll #721b63;
-    color: #ffffff;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
-}
-
-.icon:hover{
-    cursor: pointer;
-}
-.icon{
-    font-size: 28px;
-}
-
-
-footer2 {
-    margin: 50px 0;
-}
+  
+  .profile_image:hover {
+    transition: grayscale 0.5s;
+    filter: grayscale(0);
+    transition: all 600ms ease;
+  }
 
   
 
