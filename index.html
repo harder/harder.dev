@@ -2,139 +2,132 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="description" content="Crafted apps, sites, and services for your connected internet">
+	<title>Harder.DEV - Engineering Tomorrow’s Possibilities Today</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Crafting modern software applications with a touch of retro-futurism.">
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-P6X4597B');
+	</script>
 	<meta name="author" content="Kevin Harder">
 	<meta name="twitter:card" content="summary">
 	<meta name="twitter:title" content="Harder.DEV">
 	<meta name="twitter:site" content="@kevinharder">
-	<meta name="twitter:description" content="Crafted apps, sites, and services for your connected internet">
+	<meta name="twitter:description" content="Crafting modern software applications with a touch of retro-futurism.">
 	<meta property="og:title" content="Harder.DEV" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://harder.dev/" />
-	<meta property="og:description" content="Crafted apps, sites, and services for your connected internet" />
-
-	<title>Harder.DEV</title>
-    <link rel="canonical" href="https://harder.dev">
-
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="css/style.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/dd06edf683.js" crossorigin="anonymous"></script>
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-93562-11"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-		gtag('config', 'UA-93562-11');
-	</script>
+	<meta property="og:description" content="Crafting modern software applications with a touch of retro-futurism." />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto&family=DotGothic16&family=Atomic+Age&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="styles.css">
+	<link rel="icon" type="image/png" href="/favicon-48x48.png" sizes="48x48" />
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+	<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+	<meta name="apple-mobile-web-app-title" content="Harder.dev" />
+	<link rel="manifest" href="site.webmanifest" />
+	<link rel="canonical" href="https://harder.dev">
 </head>
 <body>
-	<main role="main">
-		<div class="jumbotron">
-			<div class="container">
-				<ul class="nav justify-content-end">
-					<li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-					<li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+	<header>
+		<nav class="navbar">
+			<div class="navbar-container">
+				<div class="navbar-brand">
+					<a href="#"><img src="img/icon.png" alt="Harder.DEV"/></a><a href="#">Harder.DEV</a>
+				</div>
+				<button class="navbar-toggler" id="navbar-toggler" aria-label="Toggle navigation">
+					&#9776;
+				</button>
+				<ul class="navbar-menu" id="navbar-menu">
+					<li class="nav-item">
+						<a class="nav-link" href="#projects">Projects</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#about">About</a>
+					</li>
 				</ul>
-				<h1 class="display-3">Harder.DEV</h1>
-				<p>Crafted apps, sites, and services for your connected internet.</p>
-				<!--<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>-->
+			</div>
+		</nav>
+	</header>
+
+	<!-- Hero Section -->
+	<section class="hero">
+		<div class="hero-content">
+			<h1>Engineering Tomorrow’s Possibilities Today</h1>
+			<p>Crafting modern software applications with a touch of retro-futurism.</p>
+			<a href="#about" class="btn">Get in Touch</a>
+		</div>
+	</section>
+
+	<!-- Projects Section -->
+	<section id="projects" class="projects">
+		<h2>Our Projects</h2>
+		<div class="projects-container">
+			<div class="project-card">
+				<img src="img/austin_puzzles.jpg" alt="Austin Puzzle Exchange">
+				<div class="project-body">
+					<h3><a href="https://austinpuzzles.com" target="_blank">Austin Puzzle Exchange</a></h3>
+					<p>Building community and fostering a love for puzzles through our neighborhood exchange program.
+						Share your love of puzzles and enjoy new challenges without the cost.</p>
+					<a href="https://austinpuzzles.com" target="_blank" class="btn">Visit Site</a>
+				</div>
+			</div>
+			<div class="project-card">
+				<img src="img/hcg.jpg" alt="Hill Country Gear">
+				<div class="project-body">
+					<h3><a href="https://hillcountrygear.com" target="_blank">Hill Country Gear</a></h3>
+					<p>Texas Hill Country: Adventure. Leisure. State of Mind. Hill Country Gear provides what you need
+						to enjoy it all.</p>
+						<a href="https://hillcountrygear.com" target="_blank" class="btn">Visit Site</a>
+					</div>
+			</div>
+			<div class="project-card">
+				<img src="img/stellar-arcade1.jpg" alt="Stellar Arcade">
+				<div class="project-body">
+					<h3><a href="https://stellararcade.com" target="_blank">Stellar Arcade</a></h3>
+					<p>Stellar Arcade is your go-to destination for retro electronics, sci-fi &amp; fantasy
+						collectables, and trading card games. Explore our curated marketplace, discover rare finds, and
+						dive into expert knowledge shared on our blog. Whether you’re a seasoned collector or just
+						starting out, Stellar Arcade brings the nostalgia and excitement of the past right to your
+						fingertips.</p>
+						<a href="https://stellararcade.com" target="_blank" class="btn">Visit Site</a>
+					</div>
 			</div>
 		</div>
+	</section>
 
-		<div class="container">
-
-			<div class="row">
-				<div class="col-12">
-					<a name="projects">&nbsp;</a>
-					<div class="col-md-10">
-						<h2>Projects</h2>
-					</div>
-				</div>
+	<!-- About Section -->
+	<section id="about" class="about">
+		<div class="about-container">
+			<div class="about-text">
+				<h2>About Us</h2>
+				<p>Harder.DEV is a team of skilled software engineers dedicated to crafting innovative applications and
+					providing trusted consulting services.</p>
 			</div>
-
-			<div class="row">
-				<div class="col-lg-4 col-md-6 col-sm-12">
-					<div class="card mb-4 shadow-sm">
-						<div class="card-header">
-							<img src="img/voice_devices.png" alt="Virtual Assistant Devices"  />
-						</div>
-						<div class="card-body">
-							<h5 class="card-title">Voice First Apps &amp; Skills</h5>
-							<p class="card-text">We are experts at building voice-first apps and integrations with an intuitive, supplemental, visual UI for AI virtual assistants such as Amazon Alexa, Google Assistant, and Microsoft Cortana.</p>
-							<div class="d-flex justify-content-between align-items-center">
-								<a class="btn btn-secondary" href="mailto:info@harder.dev" role="button">Contact Us &raquo;</a>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-4 col-md-6 col-sm-12">
-					<div class="card mb-4 shadow-sm">
-						<div class="card-header">
-							<img src="img/puzzle.png" alt="Austin Puzzle Exchange" title="Austin Puzzle Exchange" />
-						</div>
-						<div class="card-body">
-							<h5 class="card-title">Austin Puzzle Exchange</h5>
-							<p class="card-text">The Austin Puzzle Exchange is a neighborhood puzzle exchange we run that builds community and encourages a love of puzzles.</p>
-							<div class="d-flex justify-content-between align-items-center">
-								<a class="btn btn-secondary" href="https://austinpuzzles.com" targt="_new" role="button">Visit site &raquo;</a>
-							</div>
-						</div>
-					</div>
-				</div>
+			<div class="contact">
+				<h2>Get in Touch</h2>
+				<p>Interested in working with us? We'd love to hear from you!</p>
+				<a href="mailto:info@harder.dev" class="btn">Contact Us</a>
 			</div>
-
-			<div class="row">
-				<div class="col-12">
-					<a name="about">&nbsp;</a>
-					<hr />
-					<div class="col-md-10">
-						<h2>About</h2>
-						<p>Harder.DEV is a group of skilled software engineers who build innovative apps, sites, and services for the many different kinds of devices connected to the internet. Contact us at <a href="mailto:info@harder.dev">info@harder.dev</a> if you would like to get in touch!</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-lg-4 col-md-6 col-sm-12">
-					<div class="card mb-4 shadow-sm">
-						<div class="card-header text-center">
-							<img src="img/kevin_harder_pumpkins.jpg" class="profile_image" alt="Kevin Harder" title="Kevin Harder"  />
-						</div>
-						<div class="card-body">
-							<h5 class="card-title">Kevin Harder</h5>
-							<p class="card-text"></p>
-							<div class="d-flex justify-content-between align-items-center">
-								<a class="btn btn-secondary" href="https://kevinharder.com/" role="button">Learn more &raquo;</a>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-4 col-md-6 col-sm-12">
-					<div class="card mb-4 shadow-sm">
-						<div class="card-header text-center">
-							<img src="img/christina_harder.jpg" class="profile_image" alt="Christina Harder" title="Christina Harder" />
-						</div>
-						<div class="card-body">
-							<h5 class="card-title">Christina Harder</h5>
-							<p class="card-text"></p>
-							<div class="d-flex justify-content-between align-items-center">
-								<a class="btn btn-secondary" href="https://getchristina.com/" role="button">Learn more &raquo;</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<hr>
 		</div>
-	</main>
+	</section>
 
-	<footer class="container">
-		<p>&copy; Harder.DEV 2020</p>
+	<footer>
+		<p>&copy; 2024 Harder.DEV. All rights reserved.</p>
 	</footer>
+
+	<script>
+		// Toggle Navigation Menu on Small Screens
+		const toggler = document.getElementById('navbar-toggler');
+		const menu = document.getElementById('navbar-menu');
+
+		toggler.addEventListener('click', () => {
+			menu.classList.toggle('active');
+		});
+	</script>
 </body>
 </html>
