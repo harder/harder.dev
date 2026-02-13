@@ -1,0 +1,43 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import NeonCard from "@/components/NeonCard.astro";
+---
+
+<BaseLayout title="Principles | harder.dev" description="Guiding principles for AI and agentic experimentation.">
+  <section class="page-hero">
+    <div class="container">
+      <p class="muted">/principles</p>
+      <h1 class="hero-title">Principles</h1>
+      <p class="hero-subtitle">A small control panel for exploring tomorrow's tools without abandoning solid engineering.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2">
+      <NeonCard>
+        <h2 style="font-size:1.2rem;">1) Chase novelty, keep architecture clear</h2>
+        <p style="margin-top:0.6rem;">
+          New AI capabilities arrive weekly; systems still need to be explainable, testable, and maintainable.
+        </p>
+      </NeonCard>
+      <NeonCard>
+        <h2 style="font-size:1.2rem;">2) Guardrails before autonomy</h2>
+        <p style="margin-top:0.6rem;">
+          Instrument traces, limits, approvals, and rollback paths before turning agents loose.
+        </p>
+      </NeonCard>
+      <NeonCard>
+        <h2 style="font-size:1.2rem;">3) Evidence beats hype</h2>
+        <p style="margin-top:0.6rem;">
+          Prefer measurable outcomes, benchmarked behavior, and repeatable evals over one-off demos.
+        </p>
+      </NeonCard>
+      <NeonCard>
+        <h2 style="font-size:1.2rem;">4) Fresh inputs, trusted origins</h2>
+        <p style="margin-top:0.6rem;">
+          Keep signals current automatically while restricting ingestion to reputable engineering sources.
+        </p>
+      </NeonCard>
+    </div>
+  </section>
+</BaseLayout>

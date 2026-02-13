@@ -1,0 +1,42 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import NeonCard from "@/components/NeonCard.astro";
+import GlowButton from "@/components/GlowButton.astro";
+---
+
+<BaseLayout title="Contact | harder.dev" description="Get in touch with harder.dev.">
+  <section class="page-hero">
+    <div class="container">
+      <p class="muted">/contact</p>
+      <h1 class="hero-title">Contact</h1>
+      <p class="hero-subtitle">
+        Interested in collaborating on AI/agentic experimentation, release intelligence, or modern architecture design? Reach out.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2">
+      <NeonCard>
+        <h2 style="font-size:1.35rem;">Primary</h2>
+        <p style="margin-top:0.55rem;">Best direct path for research partnerships and engineering engagements.</p>
+        <div class="hero-actions" style="margin-top:0.9rem;">
+          <GlowButton href="mailto:info@harder.dev">info@harder.dev</GlowButton>
+        </div>
+      </NeonCard>
+
+      <NeonCard>
+        <h2 style="font-size:1.35rem;">Social</h2>
+        <p style="margin-top:0.55rem;">Quick way to follow experiments, releases, and build logs.</p>
+        <div class="hero-actions" style="margin-top:0.9rem;">
+          <GlowButton href="https://x.com/kevinharder" target="_blank" variant="ghost">
+            X / @kevinharder
+          </GlowButton>
+          <GlowButton href="https://github.com/kharder" target="_blank" variant="ghost">
+            GitHub / kharder
+          </GlowButton>
+        </div>
+      </NeonCard>
+    </div>
+  </section>
+</BaseLayout>

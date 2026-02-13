@@ -1,0 +1,75 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import NeonCard from "@/components/NeonCard.astro";
+import GlowButton from "@/components/GlowButton.astro";
+import TerminalPanel from "@/components/TerminalPanel.astro";
+import LiveSignalsWidget from "@/components/islands/LiveSignalsWidget";
+
+const workerBaseUrl = import.meta.env.PUBLIC_AI_WORKER_URL || "";
+---
+
+<BaseLayout>
+  <section class="section">
+    <div class="container split">
+      <div>
+        <p class="muted">harder.dev • field notes from tomorrow</p>
+        <h1 class="hero-title">Researching the edge of AI and agentic systems.</h1>
+        <p class="hero-subtitle">
+          We track fast-moving releases, run practical experiments, and turn findings into modern software designs that
+          are reliable enough for real products.
+        </p>
+        <div class="hero-actions">
+          <GlowButton href="/principles">View Principles</GlowButton>
+          <GlowButton href="/signals" variant="ghost">Live Signals</GlowButton>
+        </div>
+      </div>
+
+      <TerminalPanel title="current mode">
+        <p>
+          <strong style="color: var(--accent-primary)">Focus:</strong> latest models, agent frameworks, and release
+          velocity.
+        </p>
+        <p>
+          <strong style="color: var(--accent-secondary)">Approach:</strong> experiment fast, design clean systems, and
+          validate with production-minded constraints.
+        </p>
+        <p>
+          <strong style="color: var(--accent-tertiary)">Constraint:</strong> trusted sources only, with observability
+          and guardrails from day one.
+        </p>
+      </TerminalPanel>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-3">
+      <NeonCard>
+        <h2 style="font-size:1.2rem;">Track What Is New</h2>
+        <p style="margin-top:0.6rem;">Monitor model, tooling, and framework releases before they hit mainstream.</p>
+      </NeonCard>
+      <NeonCard>
+        <h2 style="font-size:1.2rem;">Experiment With Intent</h2>
+        <p style="margin-top:0.6rem;">Run tight prototype loops with clear hypotheses, metrics, and rollback plans.</p>
+      </NeonCard>
+      <NeonCard>
+        <h2 style="font-size:1.2rem;">Engineer For Production</h2>
+        <p style="margin-top:0.6rem;">
+          Apply modern architecture, testing, and reliability patterns from the start.
+        </p>
+      </NeonCard>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Live Signal Preview</h2>
+          <p class="section-subtitle">Trusted feeds, summarized into practical signals from the near future.</p>
+        </div>
+        <GlowButton href="/signals" variant="ghost">Open Full Signals</GlowButton>
+      </div>
+      <LiveSignalsWidget client:visible maxItems={4} workerBaseUrl={workerBaseUrl} />
+    </div>
+  </section>
+</BaseLayout>

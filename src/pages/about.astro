@@ -1,0 +1,72 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import NeonCard from "@/components/NeonCard.astro";
+import TerminalPanel from "@/components/TerminalPanel.astro";
+---
+
+<BaseLayout title="About | harder.dev" description="About harder.dev and Kevin Harder.">
+  <section class="page-hero">
+    <div class="container">
+      <p class="muted">/about</p>
+      <h1 class="hero-title">About harder.dev</h1>
+      <p class="hero-subtitle">
+        A retro-futuristic workshop for AI and agentic R&D, grounded in modern software engineering discipline.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <NeonCard>
+        <h2 style="font-size:1.5rem;">Who I am</h2>
+        <p style="margin-top:0.65rem;">
+          I am Kevin Harder, focused on researching emerging AI/agentic technology and turning it into useful, reliable systems.
+        </p>
+        <p style="margin-top:0.65rem;">
+          harder.dev is intentionally concise: principles, experiments, and live trusted release signals so the site stays current without constant manual updates.
+        </p>
+      </NeonCard>
+
+      <TerminalPanel title="focus areas">
+        <ul>
+          <li>Latest AI model, tooling, and agent releases</li>
+          <li>Experiment design, evaluation, and safety guardrails</li>
+          <li>Modern architecture for resilient software systems</li>
+          <li>Retro-futurist product aesthetics with clear UX</li>
+        </ul>
+      </TerminalPanel>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Modern Site Architecture</h2>
+      <p class="section-subtitle" style="margin-top:0.8rem;">
+        This site is designed to stay simple in structure and powerful in capability: static where stability matters,
+        dynamic only where freshness adds value.
+      </p>
+      <div class="grid grid-3" style="margin-top:1.2rem;">
+        <NeonCard>
+          <h3 style="font-size:1.1rem;">Static-First Core</h3>
+          <p style="margin-top:0.55rem;">
+            Astro renders fast, reliable pages with minimal client-side overhead and straightforward deployment.
+          </p>
+        </NeonCard>
+        <NeonCard>
+          <h3 style="font-size:1.1rem;">Dynamic Islands</h3>
+          <p style="margin-top:0.55rem;">
+            Preact islands activate only for live signal widgets, keeping interaction rich without turning the whole
+            site into a heavy SPA.
+          </p>
+        </NeonCard>
+        <NeonCard>
+          <h3 style="font-size:1.1rem;">Edge + Local AI Pipeline</h3>
+          <p style="margin-top:0.55rem;">
+            In-browser AI is used first when available, with Cloudflare Worker fallback, trusted feed allowlists, and
+            layered caching for resilience.
+          </p>
+        </NeonCard>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

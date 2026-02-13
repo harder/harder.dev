@@ -1,0 +1,46 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import NeonCard from "@/components/NeonCard.astro";
+import LiveSignalsWidget from "@/components/islands/LiveSignalsWidget";
+
+const workerBaseUrl = import.meta.env.PUBLIC_AI_WORKER_URL || "";
+---
+
+<BaseLayout title="Signals | harder.dev" description="Live trusted signals for AI, agentic systems, and modern engineering.">
+  <section class="page-hero">
+    <div class="container">
+      <p class="muted">/signals</p>
+      <h1 class="hero-title">Live Signals</h1>
+      <p class="hero-subtitle">
+        Dynamic widgets pull the latest trusted releases and posts, then condense them into practical AI/agentic engineering intelligence.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <LiveSignalsWidget client:visible maxItems={10} workerBaseUrl={workerBaseUrl} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2">
+      <NeonCard>
+        <h2 style="font-size:1.2rem;">Current data sources</h2>
+        <ul style="margin-top:0.7rem;">
+          <li>GitHub releases from selected AI and agentic repositories</li>
+          <li>Trusted engineering, cloud, and AI RSS feeds</li>
+          <li>Cloudflare Worker proxy fallback for CORS-restricted feeds</li>
+        </ul>
+      </NeonCard>
+      <NeonCard>
+        <h2 style="font-size:1.2rem;">Safety filters</h2>
+        <ul style="margin-top:0.7rem;">
+          <li>In-browser AI first, Workers AI fallback</li>
+          <li>Structured JSON prompt/output contract per content item</li>
+          <li>1-hour local cache to avoid repeated processing</li>
+        </ul>
+      </NeonCard>
+    </div>
+  </section>
+</BaseLayout>
