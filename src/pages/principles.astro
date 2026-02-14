@@ -8,34 +8,46 @@ import NeonCard from "@/components/NeonCard.astro";
     <div class="container">
       <p class="muted">/principles</p>
       <h1 class="hero-title">Principles</h1>
-      <p class="hero-subtitle">A small control panel for exploring tomorrow's tools without abandoning solid engineering.</p>
+      <p class="hero-subtitle">A few principles I keep coming back to after two decades of building software.</p>
     </div>
   </section>
 
   <section class="section">
     <div class="container grid grid-2">
       <NeonCard>
-        <h2 style="font-size:1.2rem;">1) Chase novelty, keep architecture clear</h2>
+        <h2 style="font-size:1.2rem;">1) Keep it understandable</h2>
         <p style="margin-top:0.6rem;">
-          New AI capabilities arrive weekly; systems still need to be explainable, testable, and maintainable.
+          If a design takes a whitepaper to explain, it will be hard to maintain. Clear beats clever most days.
         </p>
       </NeonCard>
       <NeonCard>
         <h2 style="font-size:1.2rem;">2) Guardrails before autonomy</h2>
         <p style="margin-top:0.6rem;">
-          Instrument traces, limits, approvals, and rollback paths before turning agents loose.
+          Before you give agents more room, add limits, visibility, and rollback paths. Slow is smooth, smooth is fast.
         </p>
       </NeonCard>
       <NeonCard>
-        <h2 style="font-size:1.2rem;">3) Evidence beats hype</h2>
+        <h2 style="font-size:1.2rem;">3) Let evidence lead</h2>
         <p style="margin-top:0.6rem;">
-          Prefer measurable outcomes, benchmarked behavior, and repeatable evals over one-off demos.
+          Demos are useful, but measurements decide. Benchmarks, evals, and production behavior tell the truth.
         </p>
       </NeonCard>
       <NeonCard>
-        <h2 style="font-size:1.2rem;">4) Fresh inputs, trusted origins</h2>
+        <h2 style="font-size:1.2rem;">4) Use trusted inputs</h2>
         <p style="margin-top:0.6rem;">
-          Keep signals current automatically while restricting ingestion to reputable engineering sources.
+          Automate updates, but be picky about sources. A clean feed saves a lot of cleanup later.
+        </p>
+      </NeonCard>
+      <NeonCard>
+        <h2 style="font-size:1.2rem;">5) Build for the next maintainer</h2>
+        <p style="margin-top:0.6rem;">
+          Write code and docs so future-you or a teammate can pick it up quickly. Kindness scales.
+        </p>
+      </NeonCard>
+      <NeonCard>
+        <h2 style="font-size:1.2rem;">6) Stay curious, stay practical</h2>
+        <p style="margin-top:0.6rem;">
+          I love new tools and ideas. I also like shipping. Explore boldly, then bring it back to useful outcomes.
         </p>
       </NeonCard>
     </div>

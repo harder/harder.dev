@@ -10,7 +10,7 @@ import TerminalPanel from "@/components/TerminalPanel.astro";
       <p class="muted">/about</p>
       <h1 class="hero-title">About harder.dev</h1>
       <p class="hero-subtitle">
-        A retro-futuristic workshop for AI and agentic R&D, grounded in modern software engineering discipline.
+        A practical workshop for AI and agentic R&D, with a mild retro-future vibe and a very grounded engineering core.
       </p>
     </div>
   </section>
@@ -20,19 +20,26 @@ import TerminalPanel from "@/components/TerminalPanel.astro";
       <NeonCard>
         <h2 style="font-size:1.5rem;">Who I am</h2>
         <p style="margin-top:0.65rem;">
-          I am Kevin Harder, focused on researching emerging AI/agentic technology and turning it into useful, reliable systems.
+          I am Kevin Harder, a software engineer and architecture leader based in Austin, Texas.
         </p>
         <p style="margin-top:0.65rem;">
-          harder.dev is intentionally concise: principles, experiments, and live trusted release signals so the site stays current without constant manual updates.
+          I have worked in software for over 20 years across commerce, learning, and platform systems, with most of my
+          recent years focused on principal-level architecture and modern distributed design.
+        </p>
+        <p style="margin-top:0.65rem;">
+          If you want the broader personal and career story, visit <a class="inline-link" href="https://kevinharder.com" target="_blank" rel="noreferrer noopener">kevinharder.com</a>. I maintain that site as my long-form home and use harder.dev as a tighter lab notebook for AI and engineering work.
+        </p>
+        <p style="margin-top:0.65rem;">
+          I care about mentoring, clear communication, and building systems that teams can actually run and improve over time.
         </p>
       </NeonCard>
 
       <TerminalPanel title="focus areas">
         <ul>
-          <li>Latest AI model, tooling, and agent releases</li>
-          <li>Experiment design, evaluation, and safety guardrails</li>
-          <li>Modern architecture for resilient software systems</li>
-          <li>Retro-futurist product aesthetics with clear UX</li>
+          <li>Principal-level architecture and high-scale systems</li>
+          <li>AI and agentic release intelligence + experiment design</li>
+          <li>Reliability, observability, and developer velocity</li>
+          <li>Friendly mentoring and practical engineering guidance</li>
         </ul>
       </TerminalPanel>
     </div>
@@ -42,28 +49,42 @@ import TerminalPanel from "@/components/TerminalPanel.astro";
     <div class="container">
       <h2 class="section-title">Modern Site Architecture</h2>
       <p class="section-subtitle" style="margin-top:0.8rem;">
-        This site is designed to stay simple in structure and powerful in capability: static where stability matters,
-        dynamic only where freshness adds value.
+        This site is intentionally simple at the center and dynamic only where needed. Static pages handle most of the
+        work, and small interactive islands handle live signals.
       </p>
       <div class="grid grid-3" style="margin-top:1.2rem;">
         <NeonCard>
           <h3 style="font-size:1.1rem;">Static-First Core</h3>
           <p style="margin-top:0.55rem;">
-            Astro renders fast, reliable pages with minimal client-side overhead and straightforward deployment.
+            Built with <a class="inline-link" href="https://astro.build" target="_blank" rel="noreferrer noopener">Astro</a> and <a class="inline-link" href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer noopener">TypeScript</a> for static generation, clean routing, and minimal JavaScript by default.
           </p>
         </NeonCard>
         <NeonCard>
           <h3 style="font-size:1.1rem;">Dynamic Islands</h3>
           <p style="margin-top:0.55rem;">
-            Preact islands activate only for live signal widgets, keeping interaction rich without turning the whole
-            site into a heavy SPA.
+            <a class="inline-link" href="https://docs.astro.build/en/concepts/islands/" target="_blank" rel="noreferrer noopener">Astro islands</a> with <a class="inline-link" href="https://preactjs.com" target="_blank" rel="noreferrer noopener">Preact</a> hydrate only signal widgets (`client:visible`), so we keep interactivity without turning everything into a heavy SPA.
           </p>
         </NeonCard>
         <NeonCard>
-          <h3 style="font-size:1.1rem;">Edge + Local AI Pipeline</h3>
+          <h3 style="font-size:1.1rem;">Feed + AI Processing Pipeline</h3>
           <p style="margin-top:0.55rem;">
-            In-browser AI is used first when available, with Cloudflare Worker fallback, trusted feed allowlists, and
-            layered caching for resilience.
+            Trusted feeds are summarized with local browser AI when possible, with fallback to <a class="inline-link" href="https://developers.cloudflare.com/workers/" target="_blank" rel="noreferrer noopener">Cloudflare Workers</a> + <a class="inline-link" href="https://developers.cloudflare.com/workers-ai/" target="_blank" rel="noreferrer noopener">Workers AI</a>.
+          </p>
+        </NeonCard>
+      </div>
+      <div class="grid grid-2" style="margin-top:1rem;">
+        <NeonCard>
+          <h3 style="font-size:1.1rem;">Data & Safety Controls</h3>
+          <p style="margin-top:0.55rem;">
+            Feed allowlists, CORS-aware proxying, retry/backoff, relevance filtering, and layered caching
+            (`localStorage`, edge cache, conditional `ETag` / `Last-Modified`) keep signals fresh and dependable.
+          </p>
+        </NeonCard>
+        <NeonCard>
+          <h3 style="font-size:1.1rem;">Delivery Workflow</h3>
+          <p style="margin-top:0.55rem;">
+            The Astro site deploys as static assets, while the worker deploys independently via
+            <a class="inline-link" href="https://github.com/features/actions" target="_blank" rel="noreferrer noopener">GitHub Actions</a>. That separation keeps updates fast and operational risk low.
           </p>
         </NeonCard>
       </div>
