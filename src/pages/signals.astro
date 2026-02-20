@@ -6,13 +6,13 @@ import LiveSignalsWidget from "@/components/islands/LiveSignalsWidget";
 const workerBaseUrl = import.meta.env.PUBLIC_AI_WORKER_URL || "";
 ---
 
-<BaseLayout title="Signals | harder.dev" description="Live trusted signals for AI, agentic systems, and modern engineering.">
+<BaseLayout title="Signals | harder.dev" description="Live filtered signals for the modern engineering world.">
   <section class="page-hero">
     <div class="container">
       <p class="muted">/signals</p>
       <h1 class="hero-title">Live Signals</h1>
       <p class="hero-subtitle">
-        Dynamic widgets pull the latest trusted releases and posts, then condense them into practical AI/agentic engineering intelligence.
+        This page intercepts trusted engineering broadcasts, then summarizes them into short notes I can act on.
       </p>
     </div>
   </section>
@@ -26,19 +26,18 @@ const workerBaseUrl = import.meta.env.PUBLIC_AI_WORKER_URL || "";
   <section class="section">
     <div class="container grid grid-2">
       <NeonCard>
-        <h2 style="font-size:1.2rem;">Current data sources</h2>
+        <h2 style="font-size:1.2rem;">Current Telemetry Sources</h2>
         <ul style="margin-top:0.7rem;">
-          <li>GitHub releases from selected AI and agentic repositories</li>
-          <li>Trusted engineering, cloud, and AI RSS feeds</li>
-          <li>Cloudflare Worker proxy fallback for CORS-restricted feeds</li>
+          <li>GitHub releases from selected AI and engineering repositories</li>
+          <li>Curated feeds from AI, cloud, and platform engineering teams</li>
         </ul>
       </NeonCard>
       <NeonCard>
         <h2 style="font-size:1.2rem;">Safety filters</h2>
         <ul style="margin-top:0.7rem;">
-          <li>In-browser AI first, Workers AI fallback</li>
-          <li>Structured JSON prompt/output contract per content item</li>
-          <li>1-hour local cache to avoid repeated processing</li>
+          <li>Local in-browser AI processing first, with fallback to cloud workers when needed</li>
+          <li>Structured JSON output contract per content item</li>
+          <li>Layered caching to prevent redundant cycles and unnecessary heat</li>
         </ul>
       </NeonCard>
     </div>

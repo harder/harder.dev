@@ -12,30 +12,33 @@ const workerBaseUrl = import.meta.env.PUBLIC_AI_WORKER_URL || "";
   <section class="section">
     <div class="container split">
       <div>
-        <p class="muted">harder.dev • practical notes from the edge</p>
-        <h1 class="hero-title">AI and agentic systems, tested with real engineering discipline.</h1>
+        <p class="muted">harder.dev • transmitting from Austin</p>
+        <h1 class="hero-title">I build software, run experiments, and share what I learn.</h1>
         <p class="hero-subtitle">
-          I have been building software for over 20 years. This site is where I track what is new, run small
-          experiments, and share what actually holds up when you have to run it in production.
+          I've been writing code for 25+ years. Currently I'm investigating AI, agentic tooling, and
+          modern engineering practices to see which ones actually survive contact with reality.
         </p>
         <div class="hero-actions">
-          <GlowButton href="/principles">View Principles</GlowButton>
-          <GlowButton href="/signals" variant="ghost">Live Signals</GlowButton>
+          <GlowButton href="/projects">View Projects</GlowButton>
+          <GlowButton href="/signals" variant="ghost">Sub-Space Signals</GlowButton>
         </div>
       </div>
 
-      <TerminalPanel title="current mode">
+      <TerminalPanel title="current_state">
         <p>
-          <strong style="color: var(--accent-primary)">Focus:</strong> model and framework releases worth paying
-          attention to.
+          <strong style="color: var(--accent-primary)">AI Agents:</strong> Working with OpenAI Codex, GitHub CoPilot CLI, Claude Code, Gemini &amp; Antigravity, OpenClaw, and more!
         </p>
         <p>
-          <strong style="color: var(--accent-secondary)">Approach:</strong> prototype quickly, then tighten architecture,
-          testing, and observability.
+          <strong style="color: var(--accent-secondary)">Community:</strong> Building sites and tools to bring people together, such for puzzling.
         </p>
         <p>
-          <strong style="color: var(--accent-tertiary)">Constraint:</strong> trusted sources, clear guardrails, and no
-          hype-driven shortcuts.
+          <strong style="color: var(--accent-tertiary)">Modern e-commerce:</strong> Experimenting with various types of small AI-driven projects.
+        </p>
+        <p>
+          <strong style="color: var(--accent-primary)">Open Source:</strong> Sharing and contributing to open source tools.
+        </p>
+        <p>
+          <strong style="color: var(--accent-secondary)">Mostly Harmless:</strong> I try not to break the internet.
         </p>
       </TerminalPanel>
     </div>
@@ -44,17 +47,17 @@ const workerBaseUrl = import.meta.env.PUBLIC_AI_WORKER_URL || "";
   <section class="section">
     <div class="container grid grid-3">
       <NeonCard>
-        <h2 style="font-size:1.2rem;">Stay Current Without Chasing Noise</h2>
-        <p style="margin-top:0.6rem;">Watch releases and changes early, then filter aggressively for signal.</p>
+        <h2 style="font-size:1.2rem;">Public Learning</h2>
+        <p style="margin-top:0.6rem;">I share the wins, the misses, and the occasional "what was I thinking?" moments.</p>
       </NeonCard>
       <NeonCard>
-        <h2 style="font-size:1.2rem;">Experiment With Purpose</h2>
-        <p style="margin-top:0.6rem;">Use short loops, clear hypotheses, and measurable outcomes.</p>
+        <h2 style="font-size:1.2rem;">Purposeful Chaos</h2>
+        <p style="margin-top:0.6rem;">Small experiments with clear exits beat giant "strategic initiatives" every time.</p>
       </NeonCard>
       <NeonCard>
-        <h2 style="font-size:1.2rem;">Build Like It Will Be Maintained</h2>
+        <h2 style="font-size:1.2rem;">Human-First</h2>
         <p style="margin-top:0.6rem;">
-          Favor simple designs, solid interfaces, and systems your team can support at 2 AM.
+          Architecture should be understandable by a human who hasn't had their first cup of coffee yet.
         </p>
       </NeonCard>
     </div>
@@ -64,10 +67,10 @@ const workerBaseUrl = import.meta.env.PUBLIC_AI_WORKER_URL || "";
     <div class="container">
       <div class="section-header">
         <div>
-          <h2 class="section-title">Live Signal Preview</h2>
-          <p class="section-subtitle">A friendly radar for AI and software engineering changes that actually matter.</p>
+          <h2 class="section-title">The Signal</h2>
+          <p class="section-subtitle">A filtered stream of engineering updates, curated so you don't have to doomscroll.</p>
         </div>
-        <GlowButton href="/signals" variant="ghost">Open Full Signals</GlowButton>
+        <GlowButton href="/signals" variant="ghost">View All Signals</GlowButton>
       </div>
       <LiveSignalsWidget client:visible maxItems={4} workerBaseUrl={workerBaseUrl} />
     </div>

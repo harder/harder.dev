@@ -10,7 +10,8 @@ import TerminalPanel from "@/components/TerminalPanel.astro";
       <p class="muted">/about</p>
       <h1 class="hero-title">About harder.dev</h1>
       <p class="hero-subtitle">
-        A practical workshop for AI and agentic R&D, with a mild retro-future vibe and a very grounded engineering core.
+        A mostly harmless corner of the internet where I keep notes on what I am building and learning about. As well as
+        the things I've broken, and the lessons I’ve learned while trying to fix them.
       </p>
     </div>
   </section>
@@ -18,28 +19,28 @@ import TerminalPanel from "@/components/TerminalPanel.astro";
   <section class="section">
     <div class="container split">
       <NeonCard>
-        <h2 style="font-size:1.5rem;">Who I am</h2>
+        <h2 style="font-size:1.5rem;">The Biological Entity</h2>
         <p style="margin-top:0.65rem;">
-          I am Kevin Harder, a software engineer and architecture leader based in Austin, Texas.
+          I'm Kevin Harder, a software engineer working out of my home office in Austin, Texas.
         </p>
         <p style="margin-top:0.65rem;">
-          I have worked in software for over 20 years across commerce, learning, and platform systems, with most of my
-          recent years focused on principal-level architecture and modern distributed design.
+          I have worked in software for 25 years across multiple industries, at startups and giant companies. I've taken on a variety of roles from developer to architect to engineering leader.
         </p>
         <p style="margin-top:0.65rem;">
-          If you want the broader personal and career story, visit <a class="inline-link" href="https://kevinharder.com" target="_blank" rel="noreferrer noopener">kevinharder.com</a>. I maintain that site as my long-form home and use harder.dev as a tighter lab notebook for AI and engineering work.
+          My current fascination involves tracking AI agents, running experiments, and trying to turn some of my
+          ideas into actual software that just works.
         </p>
         <p style="margin-top:0.65rem;">
-          I care about mentoring, clear communication, and building systems that teams can actually run and improve over time.
+          For the longer personal and career story, see <a class="inline-link" href="https://kevinharder.com" target="_blank" rel="noreferrer noopener">KevinHarder.com</a>.
         </p>
       </NeonCard>
 
       <TerminalPanel title="focus areas">
         <ul>
-          <li>Principal-level architecture and high-scale systems</li>
-          <li>AI and agentic release intelligence + experiment design</li>
-          <li>Reliability, observability, and developer velocity</li>
-          <li>Friendly mentoring and practical engineering guidance</li>
+          <li>Build things with clear architecture (and defaults that aren't insane)</li>
+          <li>Track AI and agentic releases that might help real teams</li>
+          <li>Execute practical experiments and share the outcomes</li>
+          <li>Document projects I am building or find genuinely interesting</li>
         </ul>
       </TerminalPanel>
     </div>
@@ -47,28 +48,35 @@ import TerminalPanel from "@/components/TerminalPanel.astro";
 
   <section class="section">
     <div class="container">
-      <h2 class="section-title">Modern Site Architecture</h2>
+      <h2 class="section-title">The Engine Room</h2>
       <p class="section-subtitle" style="margin-top:0.8rem;">
-        This site is intentionally simple at the center and dynamic only where needed. Static pages handle most of the
-        work, and small interactive islands handle live signals.
+        This site is static-first by design, with dynamic behavior only where it provides value.
+        Because the best way to ensure a page works is to not make the server do anything when someone visits.
       </p>
       <div class="grid grid-3" style="margin-top:1.2rem;">
         <NeonCard>
-          <h3 style="font-size:1.1rem;">Static-First Core</h3>
+          <h3 style="font-size:1.1rem;">Static Stability</h3>
           <p style="margin-top:0.55rem;">
-            Built with <a class="inline-link" href="https://astro.build" target="_blank" rel="noreferrer noopener">Astro</a> and <a class="inline-link" href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer noopener">TypeScript</a> for static generation, clean routing, and minimal JavaScript by default.
+            Built with <a class="inline-link" href="https://astro.build" target="_blank" rel="noreferrer noopener">Astro</a> and
+            <a class="inline-link" href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer noopener">TypeScript</a>
+            for static generation, clean routing, and minimal JavaScript by default.
+            It’s fast, predictable, and doesn't load megabytes of JavaScript just to show you a sentence.
           </p>
         </NeonCard>
         <NeonCard>
-          <h3 style="font-size:1.1rem;">Dynamic Islands</h3>
+          <h3 style="font-size:1.1rem;">Occasional Hydration</h3>
           <p style="margin-top:0.55rem;">
-            <a class="inline-link" href="https://docs.astro.build/en/concepts/islands/" target="_blank" rel="noreferrer noopener">Astro islands</a> with <a class="inline-link" href="https://preactjs.com" target="_blank" rel="noreferrer noopener">Preact</a> hydrate only signal widgets (`client:visible`), so we keep interactivity without turning everything into a heavy SPA.
+            I use <a class="inline-link" href="https://docs.astro.build/en/concepts/islands/" target="_blank" rel="noreferrer noopener">Astro dynamic islands</a>
+            for things that actually need to move. <a class="inline-link" href="https://preactjs.com" target="_blank" rel="noreferrer noopener">Preact</a>
+            hydrates the signal widget only when you're looking at it. The rest stays peacefully still.
           </p>
         </NeonCard>
         <NeonCard>
           <h3 style="font-size:1.1rem;">Feed + AI Processing Pipeline</h3>
           <p style="margin-top:0.55rem;">
-            Trusted feeds are summarized with local browser AI when possible, with fallback to <a class="inline-link" href="https://developers.cloudflare.com/workers/" target="_blank" rel="noreferrer noopener">Cloudflare Workers</a> + <a class="inline-link" href="https://developers.cloudflare.com/workers-ai/" target="_blank" rel="noreferrer noopener">Workers AI</a>.
+            Trusted feeds are summarized with local browser AI when possible, or
+            <a class="inline-link" href="https://developers.cloudflare.com/workers/" target="_blank" rel="noreferrer noopener">Cloudflare Workers</a>.
+            Pretty amazing what can be done without a dedicatd server these days.
           </p>
         </NeonCard>
       </div>
@@ -77,14 +85,15 @@ import TerminalPanel from "@/components/TerminalPanel.astro";
           <h3 style="font-size:1.1rem;">Data & Safety Controls</h3>
           <p style="margin-top:0.55rem;">
             Feed allowlists, CORS-aware proxying, retry/backoff, relevance filtering, and layered caching
-            (`localStorage`, edge cache, conditional `ETag` / `Last-Modified`) keep signals fresh and dependable.
+            (`localStorage`, edge cache, conditional `ETag` / `Last-Modified`) keep the data fresh and predictable.
           </p>
         </NeonCard>
         <NeonCard>
           <h3 style="font-size:1.1rem;">Delivery Workflow</h3>
           <p style="margin-top:0.55rem;">
             The Astro site deploys as static assets, while the worker deploys independently via
-            <a class="inline-link" href="https://github.com/features/actions" target="_blank" rel="noreferrer noopener">GitHub Actions</a>. That separation keeps updates fast and operational risk low.
+            <a class="inline-link" href="https://github.com/features/actions" target="_blank" rel="noreferrer noopener">GitHub Actions</a>.
+            It keeps updates fast and avoids coupling content deploys to edge API deploys.
           </p>
         </NeonCard>
       </div>

@@ -1,0 +1,59 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import NeonCard from "@/components/NeonCard.astro";
+---
+
+<BaseLayout title="Projects | harder.dev" description="Projects Kevin is building and exploring.">
+  <section class="page-hero">
+    <div class="container">
+      <p class="muted">/projects</p>
+      <h1 class="hero-title">Project Laboratory</h1>
+      <p class="hero-subtitle">
+        These are projects I am actively building, experimenting with, or trying to improve one small step at a time.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2">
+      <NeonCard>
+        <h2 style="font-size:1.2rem;">Austin Puzzle Exchange</h2>
+        <p style="margin-top:0.6rem;">
+          Building community and fostering a love for puzzles through our neighborhood exchange program. Share your love of puzzles and enjoy new challenges without the cost.
+        </p>
+      </NeonCard>
+
+      <NeonCard>
+        <h2 style="font-size:1.2rem;">Stellar Arcade</h2>
+        <p style="margin-top:0.6rem;">
+          Stellar Arcade is your go-to destination for retro electronics, sci-fi & fantasy collectables, and trading card games.
+          Explore our curated marketplace, discover rare finds, and dive into expert knowledge shared on our blog.
+        </p>
+        <p style="margin-top:0.6rem;">
+          An e-commerce experiment on building a nostalgic multi-channel marketplace using AI.
+        </p>
+      </NeonCard>
+
+      <NeonCard>
+        <h2 style="font-size:1.2rem;">Hill Country Gear</h2>
+        <p style="margin-top:0.6rem;">
+          Texas Hill Country: Adventure. Leisure. State of Mind. Hill Country Gear provides what you need to enjoy it all.
+          An e-commerce and operations platform focused on clean catalog workflows and maintainable systems.
+        </p>
+        <p style="margin-top:0.6rem;">
+          An e-commerce experiment in building a brand using AI.
+        </p>
+      </NeonCard>
+
+      <NeonCard>
+        <h2 style="font-size:1.2rem;">SharePuzzles</h2>
+        <p style="margin-top:0.6rem;">
+          A world-wide platform to help people share puzzles and find others who love puzzles.
+        </p>
+        <p style="margin-top:0.6rem;">
+          An experiment to create an awesome free resource that will bring people together and help them save money.
+        </p>
+      </NeonCard>
+    </div>
+  </section>
+</BaseLayout>
