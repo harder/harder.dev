@@ -23,6 +23,12 @@ cd worker
 npx wrangler deploy
 ```
 
+From repository root (useful for CI / Cloudflare dashboard deploy command):
+
+```bash
+npm run worker:deploy
+```
+
 ## Optional bindings
 
 - `AI` binding (required for `/summarize`)

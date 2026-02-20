@@ -1,6 +1,13 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import NeonCard from "@/components/NeonCard.astro";
+
+const projects = [
+  { name: "Austin Puzzle Exchange", url: "https://austinpuzzles.com" },
+  { name: "Stellar Arcade", url: "https://stellararcade.com" },
+  { name: "Hill Country Gear", url: "https://hillcountrygear.com" },
+  { name: "SharePuzzles", url: "https://sharepuzzles.com" }
+];
 ---
 
 <BaseLayout title="Projects | harder.dev" description="Projects Kevin is building and exploring.">
@@ -17,14 +24,22 @@ import NeonCard from "@/components/NeonCard.astro";
   <section class="section">
     <div class="container grid grid-2">
       <NeonCard>
-        <h2 style="font-size:1.2rem;">Austin Puzzle Exchange</h2>
+        <h2 style="font-size:1.2rem;">
+          <a class="project-title-link" href={projects[0].url} target="_blank" rel="noreferrer noopener">
+            {projects[0].name}
+          </a>
+        </h2>
         <p style="margin-top:0.6rem;">
           Building community and fostering a love for puzzles through our neighborhood exchange program. Share your love of puzzles and enjoy new challenges without the cost.
         </p>
       </NeonCard>
 
       <NeonCard>
-        <h2 style="font-size:1.2rem;">Stellar Arcade</h2>
+        <h2 style="font-size:1.2rem;">
+          <a class="project-title-link" href={projects[1].url} target="_blank" rel="noreferrer noopener">
+            {projects[1].name}
+          </a>
+        </h2>
         <p style="margin-top:0.6rem;">
           Stellar Arcade is your go-to destination for retro electronics, sci-fi & fantasy collectables, and trading card games.
           Explore our curated marketplace, discover rare finds, and dive into expert knowledge shared on our blog.
@@ -35,7 +50,11 @@ import NeonCard from "@/components/NeonCard.astro";
       </NeonCard>
 
       <NeonCard>
-        <h2 style="font-size:1.2rem;">Hill Country Gear</h2>
+        <h2 style="font-size:1.2rem;">
+          <a class="project-title-link" href={projects[2].url} target="_blank" rel="noreferrer noopener">
+            {projects[2].name}
+          </a>
+        </h2>
         <p style="margin-top:0.6rem;">
           Texas Hill Country: Adventure. Leisure. State of Mind. Hill Country Gear provides what you need to enjoy it all.
           An e-commerce and operations platform focused on clean catalog workflows and maintainable systems.
@@ -46,7 +65,11 @@ import NeonCard from "@/components/NeonCard.astro";
       </NeonCard>
 
       <NeonCard>
-        <h2 style="font-size:1.2rem;">SharePuzzles</h2>
+        <h2 style="font-size:1.2rem;">
+          <a class="project-title-link" href={projects[3].url} target="_blank" rel="noreferrer noopener">
+            {projects[3].name}
+          </a>
+        </h2>
         <p style="margin-top:0.6rem;">
           A world-wide platform to help people share puzzles and find others who love puzzles.
         </p>
@@ -57,3 +80,16 @@ import NeonCard from "@/components/NeonCard.astro";
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .project-title-link {
+    color: var(--text-main);
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(120, 198, 255, 0.45);
+  }
+
+  .project-title-link:hover {
+    color: var(--accent-primary);
+    border-bottom-color: var(--accent-primary);
+  }
+</style>
