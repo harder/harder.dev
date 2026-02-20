@@ -1,0 +1,45 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import NeonCard from "@/components/NeonCard.astro";
+import LiveSignalsWidget from "@/components/islands/LiveSignalsWidget";
+
+const workerBaseUrl = import.meta.env.PUBLIC_AI_WORKER_URL || "";
+---
+
+<BaseLayout title="Signals | harder.dev" description="Live filtered signals for the modern engineering world.">
+  <section class="page-hero">
+    <div class="container">
+      <p class="muted">/signals</p>
+      <h1 class="hero-title">Live Signals</h1>
+      <p class="hero-subtitle">
+        This page intercepts trusted engineering broadcasts, then summarizes them into short notes I can act on.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <LiveSignalsWidget client:visible maxItems={10} workerBaseUrl={workerBaseUrl} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2">
+      <NeonCard>
+        <h2 style="font-size:1.2rem;">Current Telemetry Sources</h2>
+        <ul style="margin-top:0.7rem;">
+          <li>GitHub releases from selected AI and engineering repositories</li>
+          <li>Curated feeds from AI, cloud, and platform engineering teams</li>
+        </ul>
+      </NeonCard>
+      <NeonCard>
+        <h2 style="font-size:1.2rem;">Safety filters</h2>
+        <ul style="margin-top:0.7rem;">
+          <li>Local in-browser AI processing first, with fallback to cloud workers when needed</li>
+          <li>Structured JSON output contract per content item</li>
+          <li>Layered caching to prevent redundant cycles and unnecessary heat</li>
+        </ul>
+      </NeonCard>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,78 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import NeonCard from "@/components/NeonCard.astro";
+import GlowButton from "@/components/GlowButton.astro";
+import TerminalPanel from "@/components/TerminalPanel.astro";
+import LiveSignalsWidget from "@/components/islands/LiveSignalsWidget";
+
+const workerBaseUrl = import.meta.env.PUBLIC_AI_WORKER_URL || "";
+---
+
+<BaseLayout>
+  <section class="section">
+    <div class="container split">
+      <div>
+        <p class="muted">harder.dev • transmitting from Austin</p>
+        <h1 class="hero-title">I build software, run experiments, and share what I learn.</h1>
+        <p class="hero-subtitle">
+          I've been writing code for 25+ years. Currently I'm investigating AI, agentic tooling, and
+          modern engineering practices to see which ones actually survive contact with reality.
+        </p>
+        <div class="hero-actions">
+          <GlowButton href="/projects">View Projects</GlowButton>
+          <GlowButton href="/signals" variant="ghost">Sub-Space Signals</GlowButton>
+        </div>
+      </div>
+
+      <TerminalPanel title="current_state">
+        <p>
+          <strong style="color: var(--accent-primary)">AI Agents:</strong> Working with OpenAI Codex, GitHub CoPilot CLI, Claude Code, Gemini &amp; Antigravity, OpenClaw, and more!
+        </p>
+        <p>
+          <strong style="color: var(--accent-secondary)">Community:</strong> Building sites and tools to bring people together, such for puzzling.
+        </p>
+        <p>
+          <strong style="color: var(--accent-tertiary)">Modern e-commerce:</strong> Experimenting with various types of small AI-driven projects.
+        </p>
+        <p>
+          <strong style="color: var(--accent-primary)">Open Source:</strong> Sharing and contributing to open source tools.
+        </p>
+        <p>
+          <strong style="color: var(--accent-secondary)">Mostly Harmless:</strong> I try not to break the internet.
+        </p>
+      </TerminalPanel>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-3">
+      <NeonCard>
+        <h2 style="font-size:1.2rem;">Public Learning</h2>
+        <p style="margin-top:0.6rem;">I share the wins, the misses, and the occasional "what was I thinking?" moments.</p>
+      </NeonCard>
+      <NeonCard>
+        <h2 style="font-size:1.2rem;">Purposeful Chaos</h2>
+        <p style="margin-top:0.6rem;">Small experiments with clear exits beat giant "strategic initiatives" every time.</p>
+      </NeonCard>
+      <NeonCard>
+        <h2 style="font-size:1.2rem;">Human-First</h2>
+        <p style="margin-top:0.6rem;">
+          Architecture should be understandable by a human who hasn't had their first cup of coffee yet.
+        </p>
+      </NeonCard>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">The Signal</h2>
+          <p class="section-subtitle">A filtered stream of engineering updates, curated so you don't have to doomscroll.</p>
+        </div>
+        <GlowButton href="/signals" variant="ghost">View All Signals</GlowButton>
+      </div>
+      <LiveSignalsWidget client:visible maxItems={4} workerBaseUrl={workerBaseUrl} />
+    </div>
+  </section>
+</BaseLayout>

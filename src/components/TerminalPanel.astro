@@ -1,0 +1,94 @@
+---
+type Props = {
+  title?: string;
+  subtitle?: string;
+  className?: string;
+};
+
+const { title = "terminal", subtitle, className = "" } = Astro.props as Props;
+---
+
+<section class={`terminal ${className}`.trim()}>
+  <header class="terminal-head">
+    <div class="lights" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
+    <p>{title}</p>
+  </header>
+  {subtitle && <p class="terminal-subtitle">{subtitle}</p>}
+  <div class="terminal-body">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .terminal {
+    border: 1px solid rgba(76, 242, 200, 0.36);
+    border-radius: var(--radius-card);
+    background: linear-gradient(180deg, rgba(10, 14, 38, 0.92), rgba(6, 10, 28, 0.95));
+    box-shadow:
+      inset 0 0 0 1px rgba(76, 242, 200, 0.12),
+      0 18px 30px rgba(2, 7, 25, 0.48);
+    overflow: clip;
+  }
+
+  .terminal-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.55rem 0.9rem;
+    border-bottom: 1px solid rgba(76, 242, 200, 0.25);
+    background: rgba(7, 13, 34, 0.84);
+  }
+
+  .terminal-head p {
+    color: var(--accent-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    font-size: 0.78rem;
+    font-family: "IBM Plex Mono", "SF Mono", monospace;
+  }
+
+  .terminal-subtitle {
+    padding: 0.6rem 0.9rem 0;
+    color: var(--text-muted);
+    font-size: 0.88rem;
+  }
+
+  .lights {
+    display: inline-flex;
+    gap: 0.38rem;
+  }
+
+  .lights span {
+    width: 0.62rem;
+    height: 0.62rem;
+    border-radius: 999px;
+    background: #2f4f73;
+  }
+
+  .lights span:nth-child(1) {
+    background: #ff628c;
+  }
+
+  .lights span:nth-child(2) {
+    background: #ffd06e;
+  }
+
+  .lights span:nth-child(3) {
+    background: #5bf7d5;
+  }
+
+  .terminal-body {
+    padding: 1rem;
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .terminal-body ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--text-soft);
+  }
+</style>

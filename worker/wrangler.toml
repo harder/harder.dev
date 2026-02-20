@@ -1,0 +1,18 @@
+name = "harder-dev-ai-worker"
+main = "src/index.ts"
+compatibility_date = "2026-02-12"
+
+[ai]
+binding = "AI"
+
+[vars]
+# Optional: set to your site origin in production, e.g. "https://harder.dev"
+ALLOWED_ORIGIN = "*"
+
+# Optional: for GitHub GraphQL release fetching
+# GITHUB_TOKEN = "ghp_xxx"
+
+# Optional KV namespace for conditional metadata caching
+# [[kv_namespaces]]
+# binding = "FEED_CACHE"
+# id = "YOUR_NAMESPACE_ID"

@@ -1,0 +1,157 @@
+<footer class="site-footer">
+  <div class="container footer-frame">
+    <div class="footer-orbit" aria-hidden="true"></div>
+    <div class="footer-grid">
+      <section>
+        <p class="footer-kicker">End of Transmission</p>
+        <h2 class="footer-title">Engineering tomorrow's possibilities today</h2>
+        <p>
+          Exploring the frontiers of technology and the cosmos to advance human knowledge and innovation.
+        </p>
+      </section>
+
+      <section class="footer-panel">
+        <p class="footer-label">Current Vectors</p>
+        <ul>
+          <li>Monitoring the AI/Human interface</li>
+          <li>Experiments to make life better</li>
+          <li>Architecture that teams can live with</li>
+        </ul>
+      </section>
+
+      <section class="footer-panel">
+        <p class="footer-label">Docking points</p>
+        <div class="footer-links">
+          <a href="/signals">Signals</a>
+          <a href="/projects">Projects</a>
+          <a href="/about">About</a>
+          <a href="/contact">Contact</a>
+        </div>
+      </section>
+    </div>
+    <div class="footer-meta">
+      <p>© {new Date().getFullYear()} Kevin Harder</p>
+      <p class="muted">25+ years of code. Retro-futurism vibes, principal-engineer pragmatism</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding: 2.2rem 0 2.5rem;
+    margin-top: 2.8rem;
+  }
+
+  .footer-frame {
+    position: relative;
+    overflow: clip;
+    border: 1px solid rgba(129, 174, 255, 0.26);
+    border-radius: 20px;
+    padding: 1.35rem;
+    background:
+      radial-gradient(circle at 90% 5%, rgba(246, 184, 82, 0.2), transparent 38%),
+      radial-gradient(circle at 15% 110%, rgba(93, 231, 210, 0.18), transparent 46%),
+      linear-gradient(145deg, rgba(8, 14, 36, 0.95), rgba(15, 27, 62, 0.86));
+    box-shadow: 0 20px 60px rgba(3, 7, 18, 0.52), inset 0 1px 0 rgba(218, 235, 255, 0.07);
+  }
+
+  .footer-orbit {
+    position: absolute;
+    inset: auto -12px -16px auto;
+    width: 120px;
+    height: 120px;
+    border-radius: 999px;
+    border: 1px dashed rgba(247, 203, 98, 0.45);
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .footer-title {
+    margin-top: 0.35rem;
+    font-size: clamp(1.25rem, 1.1rem + 1vw, 1.75rem);
+  }
+
+  .footer-kicker {
+    color: var(--accent-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.66rem;
+  }
+
+  .footer-panel {
+    border: 1px solid rgba(126, 166, 244, 0.22);
+    border-radius: 14px;
+    padding: 0.8rem 0.9rem;
+    background: rgba(7, 14, 34, 0.5);
+  }
+
+  .footer-label {
+    color: var(--accent-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    font-size: 0.67rem;
+  }
+
+  .footer-panel ul {
+    list-style: none;
+    margin: 0.7rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .footer-panel li {
+    color: var(--text-soft);
+    font-size: 0.9rem;
+  }
+
+  .footer-links {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  .footer-links a {
+    display: inline-flex;
+    border: 1px solid rgba(148, 187, 255, 0.24);
+    border-radius: 999px;
+    padding: 0.3rem 0.65rem;
+    font-size: 0.82rem;
+    color: var(--text-soft);
+    background: rgba(8, 15, 38, 0.64);
+  }
+
+  .footer-links a:hover {
+    border-color: rgba(76, 242, 200, 0.5);
+    color: var(--accent-primary);
+  }
+
+  .footer-meta {
+    margin-top: 1rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid rgba(148, 187, 255, 0.22);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-meta p {
+    font-size: 0.82rem;
+  }
+
+  @media (max-width: 960px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
