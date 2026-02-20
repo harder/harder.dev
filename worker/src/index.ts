@@ -27,6 +27,12 @@ type CachedUpstreamRecord = {
   updatedAt: number;
 };
 
+type SummarizeOutput = {
+  tldr: string;
+  importance: string;
+  tags: string[];
+};
+
 const DEFAULT_GITHUB_REPOS = [...FEED_CONFIG.githubRepos];
 const DEFAULT_RSS_FEEDS = [...FEED_CONFIG.blogFeeds];
 
@@ -37,6 +43,8 @@ const MODEL_IDS = [
 ];
 const CACHE_TTL_SECONDS = 60 * 60;
 const CONDITIONAL_TTL_SECONDS = 60 * 60 * 6;
+const TELEMETRY_TTL_SECONDS = 60 * 60 * 24 * 7;
+const TELEMETRY_KEY = "telemetry:counters:v1";
 
 const TRUSTED_RSS_HOSTS = new Set(
   DEFAULT_RSS_FEEDS.map((feedUrl) => {
@@ -206,11 +214,121 @@ async function fetchUpstreamWithConditional(url: string, env: Env): Promise<Cach
   throw new Error(`Upstream fetch failed for ${url} (${response.status})`);
 }
 
-function stripTags(input: string): string {
+function decodeHtmlEntities(input: string): string {
   return input
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .replace(/&apos;/gi, "'")
+    .replace(/&#39;/gi, "'")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/&#x([0-9a-fA-F]+);/g, (_, hex: string) => {
+      const codePoint = Number.parseInt(hex, 16);
+      return Number.isFinite(codePoint) ? String.fromCodePoint(codePoint) : "";
+    })
+    .replace(/&#([0-9]+);/g, (_, dec: string) => {
+      const codePoint = Number.parseInt(dec, 10);
+      return Number.isFinite(codePoint) ? String.fromCodePoint(codePoint) : "";
+    });
+}
+
+function normalizeFeedText(input: string): string {
+  return decodeHtmlEntities(input)
+    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/gi, "$1")
+    .replace(/<\!\[CDATA\[|\]\]>/g, "")
     .replace(/<[^>]*>/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function extractTag(block: string, tag: string): string {
+  const escapedTag = tag.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const match = block.match(new RegExp(`<${escapedTag}[^>]*>([\\s\\S]*?)<\\/${escapedTag}>`, "i"));
+  return match?.[1] || "";
+}
+
+function extractAtomLink(block: string, sourceUrl: string): string {
+  const alternate =
+    block.match(/<link[^>]*rel=["']alternate["'][^>]*href=["']([^"']+)["'][^>]*>/i)?.[1] ||
+    block.match(/<link[^>]*href=["']([^"']+)["'][^>]*>/i)?.[1] ||
+    extractTag(block, "id") ||
+    sourceUrl;
+  return normalizeFeedText(alternate);
+}
+
+function parseSummarizeOutput(text: string): SummarizeOutput | null {
+  const cleaned = text.trim().replace(/```json|```/gi, "");
+  const candidate = cleaned.match(/\{[\s\S]*\}/)?.[0] || cleaned;
+  try {
+    const parsed = JSON.parse(candidate) as {
+      tldr?: unknown;
+      importance?: unknown;
+      tags?: unknown;
+    };
+    if (typeof parsed.tldr !== "string" || typeof parsed.importance !== "string") return null;
+    const tags = Array.isArray(parsed.tags)
+      ? parsed.tags
+          .map((tag) => String(tag).trim())
+          .filter(Boolean)
+          .slice(0, 4)
+      : [];
+    return {
+      tldr: parsed.tldr.trim(),
+      importance: parsed.importance.trim(),
+      tags
+    };
+  } catch {
+    return null;
+  }
+}
+
+function buildFallbackSummary(input: { title?: string; content?: string; source?: string }): SummarizeOutput {
+  const title = normalizeFeedText(input.title || "New engineering update");
+  const content = normalizeFeedText(input.content || "");
+  const source = input.source || "trusted source";
+  const snippet = content.slice(0, 180);
+  const tldr = snippet.length > 20 ? `${title}. ${snippet}` : `${title}. Open the full post for details.`;
+  const importance = `Published by ${source}; worth skimming if it maps to your current roadmap.`;
+  const combined = `${title} ${content}`.toLowerCase();
+  const tags: string[] = [];
+  if (/(ai|agent|llm|model|inference|prompt|copilot)/.test(combined)) tags.push("AI");
+  if (/(dotnet|\.net|azure|microsoft|asp\.net|c#|f#)/.test(combined)) tags.push(".NET");
+  if (/(api|backend|service|runtime|kubernetes|serverless)/.test(combined)) tags.push("Backend");
+  if (/(security|supply chain|auth|identity|zero trust)/.test(combined)) tags.push("Security");
+  return { tldr, importance, tags: tags.slice(0, 4) };
+}
+
+async function incrementTelemetry(
+  env: Env,
+  counter: string,
+  amount = 1
+): Promise<void> {
+  if (!env.FEED_CACHE) return;
+  try {
+    const raw = await env.FEED_CACHE.get(TELEMETRY_KEY);
+    const record = raw ? (JSON.parse(raw) as Record<string, number>) : {};
+    record[counter] = (record[counter] || 0) + amount;
+    await env.FEED_CACHE.put(TELEMETRY_KEY, JSON.stringify(record), {
+      expirationTtl: TELEMETRY_TTL_SECONDS
+    });
+  } catch {
+    // Best-effort telemetry only.
+  }
+}
+
+function trackTelemetry(env: Env, ctx: ExecutionContext, counter: string, amount = 1): void {
+  ctx.waitUntil(incrementTelemetry(env, counter, amount));
+}
+
+async function readTelemetry(env: Env): Promise<Record<string, number>> {
+  if (!env.FEED_CACHE) return {};
+  try {
+    const raw = await env.FEED_CACHE.get(TELEMETRY_KEY);
+    return raw ? ((JSON.parse(raw) as Record<string, number>) ?? {}) : {};
+  } catch {
+    return {};
+  }
 }
 
 function parseXmlItems(xml: string, sourceUrl: string): RawFeedItem[] {
@@ -219,18 +337,19 @@ function parseXmlItems(xml: string, sourceUrl: string): RawFeedItem[] {
 
   const rssBlocks = xml.match(/<item[\s\S]*?<\/item>/gi) || [];
   rssBlocks.forEach((block, index) => {
-    const title = (block.match(/<title>([\s\S]*?)<\/title>/i)?.[1] || "Untitled").trim();
-    const link = (block.match(/<link>([\s\S]*?)<\/link>/i)?.[1] || sourceUrl).trim();
-    const description =
-      block.match(/<description>([\s\S]*?)<\/description>/i)?.[1] ||
-      block.match(/<content:encoded>([\s\S]*?)<\/content:encoded>/i)?.[1] ||
-      "";
-    const publishedAt = block.match(/<pubDate>([\s\S]*?)<\/pubDate>/i)?.[1]?.trim();
+    const title = normalizeFeedText(extractTag(block, "title") || "Untitled");
+    const link = normalizeFeedText(
+      extractTag(block, "link") || extractTag(block, "guid") || sourceUrl
+    );
+    const description = normalizeFeedText(
+      extractTag(block, "description") || extractTag(block, "content:encoded") || ""
+    );
+    const publishedAt = normalizeFeedText(extractTag(block, "pubDate"));
     items.push({
       id: `rss-${source}-${index}-${title.slice(0, 24)}`,
-      title: stripTags(title),
-      content: stripTags(description).slice(0, 2500),
-      url: stripTags(link),
+      title,
+      content: description.slice(0, 2500),
+      url: link,
       source,
       publishedAt,
       kind: "blog-post"
@@ -239,24 +358,18 @@ function parseXmlItems(xml: string, sourceUrl: string): RawFeedItem[] {
 
   const atomBlocks = xml.match(/<entry[\s\S]*?<\/entry>/gi) || [];
   atomBlocks.forEach((block, index) => {
-    const title = (block.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || "Untitled").trim();
-    const link =
-      block.match(/<link[^>]*href=["']([^"']+)["'][^>]*>/i)?.[1] ||
-      block.match(/<id>([\s\S]*?)<\/id>/i)?.[1] ||
-      sourceUrl;
-    const summary =
-      block.match(/<summary[^>]*>([\s\S]*?)<\/summary>/i)?.[1] ||
-      block.match(/<content[^>]*>([\s\S]*?)<\/content>/i)?.[1] ||
-      "";
-    const publishedAt =
-      block.match(/<updated>([\s\S]*?)<\/updated>/i)?.[1]?.trim() ||
-      block.match(/<published>([\s\S]*?)<\/published>/i)?.[1]?.trim();
+    const title = normalizeFeedText(extractTag(block, "title") || "Untitled");
+    const link = extractAtomLink(block, sourceUrl);
+    const summary = normalizeFeedText(extractTag(block, "summary") || extractTag(block, "content"));
+    const publishedAt = normalizeFeedText(
+      extractTag(block, "updated") || extractTag(block, "published")
+    );
 
     items.push({
       id: `atom-${source}-${index}-${title.slice(0, 24)}`,
-      title: stripTags(title),
-      content: stripTags(summary).slice(0, 2500),
-      url: stripTags(link),
+      title,
+      content: summary.slice(0, 2500),
+      url: link,
       source,
       publishedAt,
       kind: "blog-post"
@@ -346,7 +459,7 @@ async function fetchGithubReleases(repos: string[], env: Env): Promise<RawFeedIt
       };
 
       if (data.data) {
-        return repos
+        const parsed = repos
           .map((repo, index) => {
             const releaseNode = data.data?.[`r${index}`]?.releases?.nodes?.[0];
             if (!releaseNode) return null;
@@ -362,6 +475,9 @@ async function fetchGithubReleases(repos: string[], env: Env): Promise<RawFeedIt
             };
           })
           .filter(Boolean) as RawFeedItem[];
+        if (parsed.length > 0) {
+          return parsed;
+        }
       }
     }
   }
@@ -399,13 +515,19 @@ async function fetchGithubReleases(repos: string[], env: Env): Promise<RawFeedIt
   return rows.filter(Boolean) as RawFeedItem[];
 }
 
-async function fetchRssFeeds(urls: string[], env: Env): Promise<RawFeedItem[]> {
+async function fetchRssFeeds(
+  urls: string[],
+  env: Env,
+  ctx?: ExecutionContext
+): Promise<RawFeedItem[]> {
   const rows = await Promise.all(
     urls.map(async (url) => {
       try {
         const record = await fetchUpstreamWithConditional(url, env);
+        if (ctx) trackTelemetry(env, ctx, "rss.fetch.success");
         return parseXmlItems(record.body, url).slice(0, 4);
       } catch {
+        if (ctx) trackTelemetry(env, ctx, "rss.fetch.failure");
         return [];
       }
     })
@@ -435,24 +557,24 @@ async function cacheEndpointJson(
   return response;
 }
 
-async function handleSummarize(request: Request, env: Env): Promise<Response> {
+async function handleSummarize(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
   if (request.method !== "POST") {
     return jsonResponse(request, env, { error: "Method not allowed" }, { status: 405 });
   }
   if (!env.AI) {
     return jsonResponse(request, env, { error: "AI binding missing" }, { status: 503 });
   }
+  trackTelemetry(env, ctx, "summarize.request");
 
   const body = (await request.json().catch(() => ({}))) as {
     prompt?: string;
     title?: string;
     content?: string;
     url?: string;
+    source?: string;
   };
 
-  const prompt =
-    body.prompt ||
-    `Analyze this content:
+  const prompt = body.prompt || `Analyze this content:
 Title: ${body.title || "Untitled"}
 Body: ${(body.content || "").slice(0, 6000)}
 
@@ -463,13 +585,56 @@ Return JSON with:
 
 JSON only.`;
 
-  const result = await runWithModelFallback(env, prompt);
+  try {
+    const firstPass = await runWithModelFallback(env, prompt);
+    trackTelemetry(env, ctx, "summarize.ai_success");
+    const parsed = parseSummarizeOutput(firstPass.text);
+    if (parsed) {
+      trackTelemetry(env, ctx, "summarize.parse_success");
+      return jsonResponse(request, env, {
+        ...parsed,
+        response: JSON.stringify(parsed),
+        model: firstPass.model,
+        provider: "cloudflare-worker",
+        fallbackUsed: false
+      });
+    }
 
-  return jsonResponse(request, env, {
-    response: result.text,
-    model: result.model,
-    provider: "cloudflare-workers-ai"
-  });
+    trackTelemetry(env, ctx, "summarize.parse_failure");
+    const repairPrompt = `Convert this response to strict JSON with keys tldr, importance, tags (array of up to 4 strings). JSON only.\n\n${firstPass.text}`;
+    const repaired = await runWithModelFallback(env, repairPrompt);
+    const repairedParsed = parseSummarizeOutput(repaired.text);
+    if (repairedParsed) {
+      trackTelemetry(env, ctx, "summarize.repair_success");
+      return jsonResponse(request, env, {
+        ...repairedParsed,
+        response: JSON.stringify(repairedParsed),
+        model: repaired.model,
+        provider: "cloudflare-worker",
+        fallbackUsed: false
+      });
+    }
+
+    trackTelemetry(env, ctx, "summarize.fallback");
+    const fallback = buildFallbackSummary(body);
+    return jsonResponse(request, env, {
+      ...fallback,
+      response: JSON.stringify(fallback),
+      model: repaired.model,
+      provider: "fallback",
+      fallbackUsed: true
+    });
+  } catch (error) {
+    trackTelemetry(env, ctx, "summarize.ai_failure");
+    const fallback = buildFallbackSummary(body);
+    return jsonResponse(request, env, {
+      ...fallback,
+      response: JSON.stringify(fallback),
+      provider: "fallback",
+      fallbackUsed: true,
+      error: error instanceof Error ? error.message : "Unknown summarize error"
+    });
+  }
 }
 
 async function handleGithubReleases(
@@ -486,6 +651,7 @@ async function handleGithubReleases(
 
   return cacheEndpointJson(request, env, ctx, cacheKey, async () => {
     const items = await fetchGithubReleases(repos, env);
+    trackTelemetry(env, ctx, items.length > 0 ? "github.fetch.success" : "github.fetch.empty");
     return { items };
   });
 }
@@ -500,7 +666,7 @@ async function handleRssFeed(request: Request, env: Env, ctx: ExecutionContext):
   const cacheKey = `rss:${feeds.join("|")}`;
 
   return cacheEndpointJson(request, env, ctx, cacheKey, async () => {
-    const items = await fetchRssFeeds(feeds, env);
+    const items = await fetchRssFeeds(feeds, env, ctx);
     return { items };
   });
 }
@@ -536,6 +702,14 @@ async function handleProxy(request: Request, env: Env): Promise<Response> {
   });
 }
 
+async function handleTelemetry(request: Request, env: Env): Promise<Response> {
+  const counters = await readTelemetry(env);
+  return jsonResponse(request, env, {
+    counters,
+    updatedAt: new Date().toISOString()
+  });
+}
+
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
@@ -549,7 +723,7 @@ export default {
         return jsonResponse(request, env, { ok: true, now: new Date().toISOString() });
       }
       if (url.pathname === "/summarize") {
-        return await handleSummarize(request, env);
+        return await handleSummarize(request, env, ctx);
       }
       if (url.pathname === "/github-releases") {
         return await handleGithubReleases(request, env, ctx);
@@ -559,6 +733,9 @@ export default {
       }
       if (url.pathname === "/proxy") {
         return await handleProxy(request, env);
+      }
+      if (url.pathname === "/telemetry") {
+        return await handleTelemetry(request, env);
       }
 
       return jsonResponse(request, env, { error: "Not found" }, { status: 404 });

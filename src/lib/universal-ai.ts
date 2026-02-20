@@ -11,6 +11,15 @@ type UniversalAIOptions = {
   workerEndpoint?: string;
 };
 
+type EdgeSummarizePayload = {
+  tldr?: unknown;
+  importance?: unknown;
+  tags?: unknown;
+  provider?: unknown;
+  fallbackUsed?: unknown;
+  response?: unknown;
+};
+
 export class UniversalAI {
   private workerEndpoint: string;
 
@@ -29,7 +38,10 @@ export class UniversalAI {
     if (this.workerEndpoint) {
       try {
         const edgeResult = await this.tryEdgeInference(prompt, item);
-        return this.parseJSON(edgeResult, "cloudflare-worker", item);
+        if (typeof edgeResult === "string") {
+          return this.parseJSON(edgeResult, "cloudflare-worker", item);
+        }
+        return edgeResult;
       } catch (error) {
         console.warn("Worker summarization failed, using fallback.", error);
       }
@@ -98,7 +110,10 @@ export class UniversalAI {
     }
   }
 
-  private async tryEdgeInference(prompt: string, item: FeedRawItem): Promise<string> {
+  private async tryEdgeInference(
+    prompt: string,
+    item: FeedRawItem
+  ): Promise<string | ProcessedFields> {
     const response = await fetch(this.workerEndpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -114,7 +129,20 @@ export class UniversalAI {
       throw new Error(`Worker request failed (${response.status})`);
     }
 
-    const data = (await response.json()) as { response?: unknown };
+    const data = (await response.json()) as EdgeSummarizePayload;
+    if (typeof data.tldr === "string" || typeof data.importance === "string") {
+      const provider: ProcessedFields["provider"] =
+        data.provider === "fallback" || data.fallbackUsed === true
+          ? "fallback"
+          : "cloudflare-worker";
+      return {
+        tldr: this.cleanSentence(data.tldr, this.buildFeedTldr(item)),
+        importance: this.cleanSentence(data.importance, this.buildFeedImportance(item)),
+        tags: this.normalizeTags(data.tags),
+        provider
+      };
+    }
+
     if (typeof data.response === "string") return data.response;
     return JSON.stringify(data.response ?? data);
   }
@@ -151,10 +179,7 @@ JSON ONLY. NO MARKDOWN.`;
         tldr: this.cleanSentence(data.tldr, this.buildFeedTldr(item)),
         importance: this.cleanSentence(data.importance, this.buildFeedImportance(item)),
         tags: Array.isArray(data.tags)
-          ? data.tags
-              .map((tag) => String(tag).trim())
-              .filter(Boolean)
-              .slice(0, 4)
+          ? this.normalizeTags(data.tags)
           : [],
         provider
       };
@@ -201,6 +226,14 @@ JSON ONLY. NO MARKDOWN.`;
     if (typeof value !== "string") return fallback;
     const trimmed = value.trim();
     return trimmed.length > 0 ? trimmed : fallback;
+  }
+
+  private normalizeTags(value: unknown): string[] {
+    if (!Array.isArray(value)) return [];
+    return value
+      .map((tag) => String(tag).trim())
+      .filter(Boolean)
+      .slice(0, 4);
   }
 
   private cleanText(value: string): string {
