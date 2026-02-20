@@ -1,4 +1,13 @@
-# Cloudflare Worker (Hybrid Feed + AI)
+# Harder.DEV
+This is the repo for the Harder.DEV web site.
+
+Built with Astro and TypeScript.
+
+Trusted feeds are enabled via Astro dynamic islands and CloudFlare workers.
+I leverage in-browser AI capabilities (Prompt AI for Chrome/Edge, or Apple Intelligence for Safari) to do the content processing for each content item if possible, or utilize a CloudFlare worker otherwise.
+
+
+## Cloudflare Worker Details (Hybrid Feed + AI)
 
 This Worker provides:
 
@@ -16,7 +25,7 @@ It includes:
 - trusted host allowlists for RSS/proxy endpoints
 - Workers AI model fallback chain (starting with `@cf/meta/llama-3.3-70b-instruct-awq`)
 
-## Deploy
+### Deploy
 
 ```bash
 cd worker
@@ -29,13 +38,13 @@ From repository root (useful for CI / Cloudflare dashboard deploy command):
 npm run worker:deploy
 ```
 
-## Optional bindings
+### Optional bindings
 
 - `AI` binding (required for `/summarize`)
 - `GITHUB_TOKEN` secret (optional, enables GitHub GraphQL branch)
 - `FEED_CACHE` KV binding (optional, enables persisted conditional metadata)
 
-## Frontend integration
+### Frontend integration
 
 Set this env var in the Astro app:
 
