@@ -15,8 +15,9 @@ type CachePayload = {
   items: FeedProcessedItem[];
 };
 
-const CACHE_KEY = "harder:hybrid-feed-cache:v3";
+const CACHE_KEY = "harder:hybrid-feed-cache:v4";
 const CACHE_TTL_MS = 60 * 60 * 1000;
+const CACHE_POOL_SIZE = 12;
 
 function readCache(): CachePayload | null {
   try {
@@ -43,7 +44,8 @@ function writeCache(items: FeedProcessedItem[]): void {
 async function processWithConcurrency(
   rawItems: FeedRawItem[],
   ai: UniversalAI,
-  onProgress: (count: number) => void
+  onProgress: (count: number) => void,
+  onItem?: (item: FeedProcessedItem) => void
 ): Promise<FeedProcessedItem[]> {
   const concurrency = 2;
   const queue = [...rawItems];
@@ -56,11 +58,13 @@ async function processWithConcurrency(
       if (!next) break;
 
       const aiResult = await ai.processContent(next);
-      output.push({
+      const processedItem: FeedProcessedItem = {
         ...next,
         ...aiResult,
         processedAt: new Date().toISOString()
-      });
+      };
+      output.push(processedItem);
+      onItem?.(processedItem);
       processed += 1;
       onProgress(processed);
     }
@@ -90,8 +94,9 @@ export default function LiveSignalsWidget({ maxItems = 10, workerBaseUrl = "" }:
       setState("fetching");
       setErrorText("");
       try {
-        const raw = await fetchPublicContentFeeds({ workerBaseUrl, maxItems: maxItems + 4 });
-        const selected = raw.slice(0, maxItems);
+        const poolSize = Math.max(maxItems + 4, CACHE_POOL_SIZE);
+        const raw = await fetchPublicContentFeeds({ workerBaseUrl, maxItems: poolSize });
+        const selected = raw.slice(0, poolSize);
         if (!alive) return;
 
         setState("processing");
@@ -101,9 +106,18 @@ export default function LiveSignalsWidget({ maxItems = 10, workerBaseUrl = "" }:
           ? `${workerBaseUrl.replace(/\/+$/, "")}/summarize`
           : "";
         const ai = new UniversalAI({ workerEndpoint: summarizeEndpoint });
+        const partialItems: FeedProcessedItem[] = [];
         const processed = await processWithConcurrency(selected, ai, (count) => {
           if (!alive) return;
           setProgress((prev) => ({ ...prev, complete: count }));
+        }, (item) => {
+          if (!alive) return;
+          partialItems.push(item);
+          const partialSorted = [...partialItems].sort(
+            (a, b) =>
+              Date.parse(b.publishedAt || b.processedAt) - Date.parse(a.publishedAt || a.processedAt)
+          );
+          setItems(partialSorted.slice(0, maxItems));
         });
         if (!alive) return;
 
@@ -111,8 +125,8 @@ export default function LiveSignalsWidget({ maxItems = 10, workerBaseUrl = "" }:
           (a, b) =>
             Date.parse(b.publishedAt || b.processedAt) - Date.parse(a.publishedAt || a.processedAt)
         );
-        setItems(sorted);
         writeCache(sorted);
+        setItems(sorted.slice(0, maxItems));
         setState("ready");
       } catch (error) {
         if (!alive) return;
