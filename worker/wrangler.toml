@@ -12,7 +12,9 @@ ALLOWED_ORIGIN = "*"
 # Optional: for GitHub GraphQL release fetching
 # GITHUB_TOKEN = "ghp_xxx"
 
-# Optional KV namespace for conditional metadata caching
-# [[kv_namespaces]]
-# binding = "FEED_CACHE"
-# id = "YOUR_NAMESPACE_ID"
+# Optional KV namespace for conditional metadata caching.
+# Create with: npx wrangler kv namespace create FEED_CACHE
+[[kv_namespaces]]
+binding = "FEED_CACHE"
+id = "471488c12b79425b8350957b8ff0550c"
+# preview_id = "5fc0f2c869394979bbd7273f8bc702fc"
