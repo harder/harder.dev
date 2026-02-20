@@ -15,7 +15,7 @@ type CachePayload = {
   items: FeedProcessedItem[];
 };
 
-const CACHE_KEY = "harder:hybrid-feed-cache:v2";
+const CACHE_KEY = "harder:hybrid-feed-cache:v3";
 const CACHE_TTL_MS = 60 * 60 * 1000;
 
 function readCache(): CachePayload | null {
