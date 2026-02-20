@@ -256,11 +256,16 @@ async function fetchRssFallback(): Promise<FeedRawItem[]> {
   const rows = await Promise.all(
     RSS_FEEDS.map(async (feedUrl) => {
       const normalizedUrl = normalizeFeedUrl(feedUrl);
-      const proxied = `https://corsproxy.io/?${encodeURIComponent(normalizedUrl)}`;
-      const response = await fetchWithRetry(proxied);
-      if (!response.ok) return [];
-      const xmlText = await response.text();
-      return parseRssXml(xmlText, normalizedUrl).slice(0, 4);
+      try {
+        const proxied = `https://corsproxy.io/?${encodeURIComponent(normalizedUrl)}`;
+        const response = await fetchWithRetry(proxied);
+        if (!response.ok) return [];
+        const xmlText = await response.text();
+        return parseRssXml(xmlText, normalizedUrl).slice(0, 4);
+      } catch (error) {
+        console.warn(`RSS fallback fetch failed for ${normalizedUrl}`, error);
+        return [];
+      }
     })
   );
   return rows.flat();
@@ -305,9 +310,20 @@ export async function fetchPublicContentFeeds(options: FeedOptions = {}): Promis
     );
   }
 
-  const [githubFallback, rssFallback] = await Promise.all([
+  const [githubResult, rssResult] = await Promise.allSettled([
     fetchGithubFallback(1),
     fetchRssFallback()
   ]);
+
+  const githubFallback = githubResult.status === "fulfilled" ? githubResult.value : [];
+  const rssFallback = rssResult.status === "fulfilled" ? rssResult.value : [];
+
+  if (githubResult.status === "rejected") {
+    console.warn("GitHub fallback fetch failed.", githubResult.reason);
+  }
+  if (rssResult.status === "rejected") {
+    console.warn("RSS fallback fetch failed.", rssResult.reason);
+  }
+
   return normalizeAndSort([...githubFallback, ...rssFallback], maxItems);
 }
