@@ -23,13 +23,13 @@ export class UniversalAI {
 
     const localResult = await this.tryLocalInference(prompt);
     if (localResult) {
-      return this.parseJSON(localResult.text, localResult.provider);
+      return this.parseJSON(localResult.text, localResult.provider, item);
     }
 
     if (this.workerEndpoint) {
       try {
         const edgeResult = await this.tryEdgeInference(prompt, item);
-        return this.parseJSON(edgeResult, "cloudflare-worker");
+        return this.parseJSON(edgeResult, "cloudflare-worker", item);
       } catch (error) {
         console.warn("Worker summarization failed, using fallback.", error);
       }
@@ -133,7 +133,11 @@ Return a JSON object with:
 JSON ONLY. NO MARKDOWN.`;
   }
 
-  private parseJSON(text: string, provider: ProcessedFields["provider"]): ProcessedFields {
+  private parseJSON(
+    text: string,
+    provider: ProcessedFields["provider"],
+    item: FeedRawItem
+  ): ProcessedFields {
     try {
       const normalized = text.trim().replace(/```json|```/g, "");
       const candidate = normalized.match(/\{[\s\S]*\}/)?.[0] || normalized;
@@ -144,11 +148,8 @@ JSON ONLY. NO MARKDOWN.`;
       };
 
       return {
-        tldr: this.cleanSentence(data.tldr, "Summary unavailable."),
-        importance: this.cleanSentence(
-          data.importance,
-          "Why this matters is still being evaluated."
-        ),
+        tldr: this.cleanSentence(data.tldr, this.buildFeedTldr(item)),
+        importance: this.cleanSentence(data.importance, this.buildFeedImportance(item)),
         tags: Array.isArray(data.tags)
           ? data.tags
               .map((tag) => String(tag).trim())
@@ -158,24 +159,32 @@ JSON ONLY. NO MARKDOWN.`;
         provider
       };
     } catch {
-      return {
-        tldr: "Summary unavailable.",
-        importance: "Why this matters is still being evaluated.",
-        tags: [],
-        provider: "fallback"
-      };
+      return this.fallbackSummary(item);
     }
   }
 
   private fallbackSummary(item: FeedRawItem): ProcessedFields {
-    const title = item.title || "New engineering update";
-    const source = item.source || "trusted source";
     return {
-      tldr: `${title} was published recently from ${source}. Open the full post to review details.`,
-      importance: "This may affect current AI/software workflows and is worth a quick skim.",
+      tldr: this.buildFeedTldr(item),
+      importance: this.buildFeedImportance(item),
       tags: this.deriveFallbackTags(item),
       provider: "fallback"
     };
+  }
+
+  private buildFeedTldr(item: FeedRawItem): string {
+    const title = this.cleanText(item.title || "New engineering update");
+    const content = this.cleanText(item.content || "");
+    if (content.length >= 40) {
+      const snippet = this.firstSentence(content, 180);
+      return `${title}. ${snippet}`;
+    }
+    return `${title}. Open the full post for details.`;
+  }
+
+  private buildFeedImportance(item: FeedRawItem): string {
+    const source = item.source || "trusted source";
+    return `Published by ${source}; worth a quick skim if this aligns with your current stack or roadmap.`;
   }
 
   private deriveFallbackTags(item: FeedRawItem): string[] {
@@ -192,6 +201,23 @@ JSON ONLY. NO MARKDOWN.`;
     if (typeof value !== "string") return fallback;
     const trimmed = value.trim();
     return trimmed.length > 0 ? trimmed : fallback;
+  }
+
+  private cleanText(value: string): string {
+    return value
+      .replace(/<[^>]*>/g, " ")
+      .replace(/&nbsp;/gi, " ")
+      .replace(/&amp;/gi, "&")
+      .replace(/&quot;/gi, '"')
+      .replace(/&#39;/gi, "'")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  private firstSentence(value: string, maxLength: number): string {
+    const sliced = value.slice(0, maxLength);
+    const match = sliced.match(/(.+?[.!?])(\s|$)/);
+    return (match?.[1] || sliced).trim();
   }
 
   private normalizeModelOutput(raw: unknown): string {

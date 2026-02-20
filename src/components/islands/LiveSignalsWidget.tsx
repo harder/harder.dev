@@ -181,6 +181,11 @@ export default function LiveSignalsWidget({ maxItems = 10, workerBaseUrl = "" }:
                   Read full post
                 </a>
               </p>
+              {item.provider === "fallback" && (
+                <p style="margin-top:0.45rem;font-size:0.72rem;color:var(--text-muted);">
+                  AI summary unavailable for this item. Showing feed-derived text.
+                </p>
+              )}
             </article>
           ))}
         </div>

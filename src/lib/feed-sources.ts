@@ -272,7 +272,24 @@ async function fetchRssFallback(): Promise<FeedRawItem[]> {
 }
 
 function normalizeAndSort(items: FeedRawItem[], maxItems: number): FeedRawItem[] {
-  return items
+  const deduped = new Map<string, FeedRawItem>();
+  for (const item of items) {
+    const key = item.url.trim().toLowerCase();
+    if (!key) continue;
+    const existing = deduped.get(key);
+    if (!existing) {
+      deduped.set(key, item);
+      continue;
+    }
+
+    const existingDate = Date.parse(existing.publishedAt || "");
+    const nextDate = Date.parse(item.publishedAt || "");
+    if (Number.isFinite(nextDate) && (!Number.isFinite(existingDate) || nextDate > existingDate)) {
+      deduped.set(key, item);
+    }
+  }
+
+  return Array.from(deduped.values())
     .filter((item) => item.title && item.url)
     .filter((item) => isRelevantItem(item))
     .sort((a, b) => Date.parse(b.publishedAt || "") - Date.parse(a.publishedAt || ""))
