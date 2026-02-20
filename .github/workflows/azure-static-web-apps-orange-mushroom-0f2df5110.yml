@@ -32,10 +32,20 @@ jobs:
             exit 1
           fi
 
+      - name: Validate public worker URL variable
+        run: |
+          if [ -z "${{ vars.PUBLIC_AI_WORKER_URL }}" ]; then
+            echo "Missing required repository variable: PUBLIC_AI_WORKER_URL"
+            echo "Set it to your Worker URL, e.g. https://harder-dev-ai-worker.kevin-900.workers.dev"
+            exit 1
+          fi
+
       - name: Install Dependencies
         run: npm ci
 
       - name: Build Astro Site
+        env:
+          PUBLIC_AI_WORKER_URL: ${{ vars.PUBLIC_AI_WORKER_URL }}
         run: npm run build
 
       - name: Build And Deploy
