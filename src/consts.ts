@@ -1,6 +1,6 @@
 export const SITE_TITLE = "Harder.dev | Engineering Tomorrow's Possibilities Today";
 export const SITE_DESCRIPTION =
-  "Kevin Harder's notes, advice, and trusted live signals for AI, agentic systems, architecture, and modern software engineering.";
+  "Harder Labs LLC (dba Harder Labs): Kevin Harder's build log, experiments, and operating notes across software, AI, and niche e-commerce ventures.";
 export const SITE_URL = "https://harder.dev";
 
 export const NAV_LINKS = [
