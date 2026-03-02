@@ -5,20 +5,20 @@ import TagChip from "@/components/TagChip.astro";
 
 const projects = [
   { name: "Hill Country Gear", url: "https://hillcountrygear.com" },
-  { name: "Stellar Arcade", url: "https://stellararcade.com" },
   { name: "SharePuzzles", url: "https://sharepuzzles.com" },
+  { name: "Stellar Arcade", url: "https://stellararcade.com" },
   { name: "Austin Puzzle Exchange", url: "https://austinpuzzles.com" }
 ];
 ---
 
-<BaseLayout title="Projects | Harder Labs" description="Brands and ventures operated by Harder Labs — niche e-commerce, community platforms, and software experiments.">
+<BaseLayout title="Projects | Harder Labs" description="Brands and ventures operated by Harder Labs.">
   <section class="page-hero">
     <div class="container">
       <p class="muted">/projects</p>
       <h1 class="hero-title">Our Ventures</h1>
       <p class="hero-subtitle">
         Brands, platforms, and experiments actively built and operated by Harder Labs.
-        Each one is a real business with real customers — not a side project in a drawer.
+        Each one is a real business helping real customers enjoy their lives.
       </p>
     </div>
   </section>
@@ -31,23 +31,10 @@ const projects = [
             {projects[0].name}
           </a>
         </h2>
-        <div style="margin-top:0.45rem;"><TagChip>E-Commerce</TagChip><TagChip>DBA</TagChip></div>
+        <div style="margin-top:0.45rem;"><TagChip>E-Commerce</TagChip><TagChip>Guide</TagChip><TagChip>DBA</TagChip></div>
         <p style="margin-top:0.6rem;">
           Texas Hill Country: Adventure. Leisure. State of Mind. Hill Country Gear provides what you need to enjoy it all.
-          An e-commerce and operations platform focused on clean catalog workflows and maintainable systems.
-        </p>
-      </NeonCard>
-
-      <NeonCard>
-        <h2 style="font-size:1.2rem;">
-          <a class="project-title-link" href={projects[1].url} target="_blank" rel="noreferrer noopener">
-            {projects[1].name}
-          </a>
-        </h2>
-        <div style="margin-top:0.45rem;"><TagChip>E-Commerce</TagChip><TagChip>DBA</TagChip></div>
-        <p style="margin-top:0.6rem;">
-          Stellar Arcade is your go-to destination for retro electronics, sci-fi & fantasy collectables, and trading card games.
-          Explore our curated marketplace, discover rare finds, and dive into expert knowledge shared on our blog.
+          Detailed guides, advice, and the best clothing and gear for Hill Country adventures.
         </p>
       </NeonCard>
 
@@ -57,10 +44,22 @@ const projects = [
             {projects[2].name}
           </a>
         </h2>
-        <div style="margin-top:0.45rem;"><TagChip>Platform</TagChip><TagChip>DBA</TagChip></div>
+        <div style="margin-top:0.45rem;"><TagChip>Community</TagChip><TagChip>Platform</TagChip><TagChip>DBA</TagChip></div>
         <p style="margin-top:0.6rem;">
-          A worldwide platform to help people share puzzles and find others who love puzzles.
-          A community resource that brings people together and helps them save money.
+          A community-driven exchange network designed to bring people together and help them save money. By combining a real-time exchange map with a peer-to-peer trade engine and AI-powered wish-list alerts, the platform bridges neighborhood porch swaps with a worldwide digital inventory to power a global circular puzzle economy.
+        </p>
+      </NeonCard>
+
+      <NeonCard>
+        <h2 style="font-size:1.2rem;">
+          <a class="project-title-link" href={projects[1].url} target="_blank" rel="noreferrer noopener">
+            {projects[1].name}
+          </a>
+        </h2>
+        <div style="margin-top:0.45rem;"><TagChip>E-Commerce</TagChip><TagChip>News & Reviews</TagChip><TagChip>DBA</TagChip></div>
+        <p style="margin-top:0.6rem;">
+          Stellar Arcade is your go-to destination for retro electronics, sci-fi & fantasy collectables, and trading card games.
+          Explore our curated marketplace, discover rare finds, and dive into expert knowledge shared on our blog.
         </p>
       </NeonCard>
 
@@ -70,7 +69,7 @@ const projects = [
             {projects[3].name}
           </a>
         </h2>
-        <div style="margin-top:0.45rem;"><TagChip>Community</TagChip><TagChip>DBA</TagChip></div>
+        <div style="margin-top:0.45rem;"><TagChip>Community</TagChip><TagChip>Local Organization</TagChip></div>
         <p style="margin-top:0.6rem;">
           Building community and fostering a love for puzzles through our neighborhood exchange program.
           Share your love of puzzles and enjoy new challenges without the cost.

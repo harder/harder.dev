@@ -1,6 +1,6 @@
 export const SITE_TITLE = "Harder Labs | Building What's Next";
 export const SITE_DESCRIPTION =
-  "Harder Labs is an Austin, Texas company building niche e-commerce brands, software experiments, and open tools. Founded by Kevin Harder.";
+  "Harder Labs is an Austin, Texas company building e-commerce brands, online communities, software experiments, and open tools. Founded by Kevin Harder.";
 export const SITE_URL = "https://harder.dev";
 
 export const NAV_LINKS = [

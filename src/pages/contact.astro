@@ -8,23 +8,72 @@ import GlowButton from "@/components/GlowButton.astro";
   <section class="page-hero">
     <div class="container">
       <p class="muted">/contact</p>
-      <h1 class="hero-title">Establish Contact</h1>
+      <h1 class="hero-title">Start a Conversation</h1>
       <p class="hero-subtitle">
-        Want to compare notes, swap ideas, talk business, or have a question? Open a channel with us.
+        Let's build something together. Open a channel with us.
       </p>
+      <p style="margin-top:0.65rem; color: var(--text-soft);">
+        Whether you are interested in working with us, have a question about an order from one of our brands,
+        or a technical inquiry for the lab, we're listening.
+      </p>
+      <div class="hero-actions" style="margin-top:1rem;">
+        <GlowButton href="#brands">Say Hello</GlowButton>
+      </div>
+    </div>
+  </section>
+
+  <section id="brands" class="section">
+    <div class="container grid grid-2">
+
+      <NeonCard>
+        <h2 style="font-size:1.35rem;">SharePuzzles</h2>
+        <p style="margin-top:0.55rem; color: var(--text-soft);">Questions</p>
+        <div class="hero-actions" style="margin-top:0.9rem;">
+          <GlowButton href="mailto:info@sharepuzzles.com">info@sharepuzzles.com</GlowButton>
+        </div>
+      </NeonCard>
+
+      <NeonCard>
+        <h2 style="font-size:1.35rem;">Hill Country Gear</h2>
+        <p style="margin-top:0.55rem; color: var(--text-soft);">Questions</p>
+        <div class="hero-actions" style="margin-top:0.9rem;">
+          <GlowButton href="mailto:info@hillcountrygear.com">info@hillcountrygear.com</GlowButton>
+        </div>
+      </NeonCard>
+
+      <NeonCard>
+        <h2 style="font-size:1.35rem;">Stellar Arcade</h2>
+        <p style="margin-top:0.55rem; color: var(--text-soft);">Questions</p>
+        <div class="hero-actions" style="margin-top:0.9rem;">
+          <GlowButton href="mailto:info@stellararcade.com">info@stellararcade.com</GlowButton>
+        </div>
+      </NeonCard>
+
+      <NeonCard>
+        <h2 style="font-size:1.35rem;">General Lab Inquiries</h2>
+        <p style="margin-top:0.55rem; color: var(--text-soft);">Partnerships &amp; Experiments</p>
+        <div class="hero-actions" style="margin-top:0.9rem;">
+          <GlowButton href="mailto:kevin@harder.dev">kevin@harder.dev</GlowButton>
+        </div>
+      </NeonCard>
+
+      <NeonCard>
+        <h2 style="font-size:1.35rem;">Legal &amp; Privacy</h2>
+        <p style="margin-top:0.55rem; color: var(--text-soft);">Official Notices</p>
+        <div class="hero-actions" style="margin-top:0.9rem;">
+          <GlowButton href="mailto:kevin@harder.dev">kevin@harder.dev</GlowButton>
+        </div>
+      </NeonCard>
     </div>
   </section>
 
   <section class="section">
     <div class="container grid grid-2">
       <NeonCard>
-        <h2 style="font-size:1.35rem;">Business Inquiries</h2>
+        <h2 style="font-size:1.35rem;">The Lab is Always Running</h2>
         <p style="margin-top:0.55rem;">
-          The most direct path. We read everything.
+          We are a small, focused team. We typically respond to all inquiries within 24 business hours.
         </p>
-        <div class="hero-actions" style="margin-top:0.9rem;">
-          <GlowButton href="mailto:kevin@harder.dev">kevin@harder.dev</GlowButton>
-        </div>
       </NeonCard>
 
       <NeonCard>
@@ -48,10 +97,10 @@ import GlowButton from "@/components/GlowButton.astro";
   <section class="section">
     <div class="container">
       <NeonCard>
-        <h2 style="font-size:1.15rem;">Mailing Address</h2>
+        <h2 style="font-size:1.15rem;">Harder Labs HQ &mdash; Austin, Texas</h2>
         <p style="margin-top:0.55rem; color: var(--text-soft);">
-          Harder Labs LLC<br />
-          Austin, TX
+          We are a digital-first studio. While we love our Austin community, we do not accept walk-ins
+          or physical returns at our registered office. Please contact us via email for return instructions.
         </p>
       </NeonCard>
     </div>
