@@ -1,22 +1,24 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import NeonCard from "@/components/NeonCard.astro";
+import TagChip from "@/components/TagChip.astro";
 
 const projects = [
-  { name: "Austin Puzzle Exchange", url: "https://austinpuzzles.com" },
-  { name: "Stellar Arcade", url: "https://stellararcade.com" },
   { name: "Hill Country Gear", url: "https://hillcountrygear.com" },
-  { name: "SharePuzzles", url: "https://sharepuzzles.com" }
+  { name: "Stellar Arcade", url: "https://stellararcade.com" },
+  { name: "SharePuzzles", url: "https://sharepuzzles.com" },
+  { name: "Austin Puzzle Exchange", url: "https://austinpuzzles.com" }
 ];
 ---
 
-<BaseLayout title="Projects | harder.dev" description="Projects Kevin is building and exploring.">
+<BaseLayout title="Projects | Harder Labs" description="Brands and ventures operated by Harder Labs — niche e-commerce, community platforms, and software experiments.">
   <section class="page-hero">
     <div class="container">
       <p class="muted">/projects</p>
-      <h1 class="hero-title">Project Laboratory</h1>
+      <h1 class="hero-title">Our Ventures</h1>
       <p class="hero-subtitle">
-        These are projects I am actively building, experimenting with, or trying to improve one small step at a time.
+        Brands, platforms, and experiments actively built and operated by Harder Labs.
+        Each one is a real business with real customers — not a side project in a drawer.
       </p>
     </div>
   </section>
@@ -29,8 +31,10 @@ const projects = [
             {projects[0].name}
           </a>
         </h2>
+        <div style="margin-top:0.45rem;"><TagChip>E-Commerce</TagChip><TagChip>DBA</TagChip></div>
         <p style="margin-top:0.6rem;">
-          Building community and fostering a love for puzzles through our neighborhood exchange program. Share your love of puzzles and enjoy new challenges without the cost.
+          Texas Hill Country: Adventure. Leisure. State of Mind. Hill Country Gear provides what you need to enjoy it all.
+          An e-commerce and operations platform focused on clean catalog workflows and maintainable systems.
         </p>
       </NeonCard>
 
@@ -40,12 +44,10 @@ const projects = [
             {projects[1].name}
           </a>
         </h2>
+        <div style="margin-top:0.45rem;"><TagChip>E-Commerce</TagChip><TagChip>DBA</TagChip></div>
         <p style="margin-top:0.6rem;">
           Stellar Arcade is your go-to destination for retro electronics, sci-fi & fantasy collectables, and trading card games.
           Explore our curated marketplace, discover rare finds, and dive into expert knowledge shared on our blog.
-        </p>
-        <p style="margin-top:0.6rem;">
-          An e-commerce experiment on building a nostalgic multi-channel marketplace using AI.
         </p>
       </NeonCard>
 
@@ -55,12 +57,10 @@ const projects = [
             {projects[2].name}
           </a>
         </h2>
+        <div style="margin-top:0.45rem;"><TagChip>Platform</TagChip><TagChip>DBA</TagChip></div>
         <p style="margin-top:0.6rem;">
-          Texas Hill Country: Adventure. Leisure. State of Mind. Hill Country Gear provides what you need to enjoy it all.
-          An e-commerce and operations platform focused on clean catalog workflows and maintainable systems.
-        </p>
-        <p style="margin-top:0.6rem;">
-          An e-commerce experiment in building a brand using AI.
+          A worldwide platform to help people share puzzles and find others who love puzzles.
+          A community resource that brings people together and helps them save money.
         </p>
       </NeonCard>
 
@@ -70,11 +70,10 @@ const projects = [
             {projects[3].name}
           </a>
         </h2>
+        <div style="margin-top:0.45rem;"><TagChip>Community</TagChip><TagChip>DBA</TagChip></div>
         <p style="margin-top:0.6rem;">
-          A world-wide platform to help people share puzzles and find others who love puzzles.
-        </p>
-        <p style="margin-top:0.6rem;">
-          An experiment to create an awesome free resource that will bring people together and help them save money.
+          Building community and fostering a love for puzzles through our neighborhood exchange program.
+          Share your love of puzzles and enjoy new challenges without the cost.
         </p>
       </NeonCard>
     </div>

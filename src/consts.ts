@@ -1,6 +1,6 @@
-export const SITE_TITLE = "Harder.dev | Engineering Tomorrow's Possibilities Today";
+export const SITE_TITLE = "Harder Labs | Building What's Next";
 export const SITE_DESCRIPTION =
-  "Kevin Harder's notes, advice, and trusted live signals for AI, agentic systems, architecture, and modern software engineering.";
+  "Harder Labs is an Austin, Texas company building niche e-commerce brands, software experiments, and open tools. Founded by Kevin Harder.";
 export const SITE_URL = "https://harder.dev";
 
 export const NAV_LINKS = [
@@ -8,4 +8,9 @@ export const NAV_LINKS = [
   { href: "/signals", label: "Signals" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" }
+];
+
+export const LEGAL_LINKS = [
+  { href: "/terms", label: "Terms" },
+  { href: "/privacy", label: "Privacy" }
 ];
