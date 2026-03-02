@@ -1,11 +1,17 @@
+---
+import { LEGAL_LINKS } from "@/consts";
+---
+
 <footer class="site-footer">
   <div class="container footer-frame">
     <div class="footer-orbit" aria-hidden="true"></div>
     <div class="footer-grid">
       <section>
         <p class="footer-kicker">End of Transmission</p>
-        <h2 class="footer-title">Engineering tomorrow's possibilities today</h2>
+        <h2 class="footer-title">Building what's next</h2>
         <p>
+          Harder Labs is an Austin, Texas company building e-commerce brands,
+          community platforms, and software projects.
           Exploring the frontiers of technology and the cosmos to advance human knowledge and innovation.
         </p>
       </section>
@@ -13,8 +19,9 @@
       <section class="footer-panel">
         <p class="footer-label">Current Vectors</p>
         <ul>
-          <li>Monitoring the AI/Human interface</li>
-          <li>Experiments to make life better</li>
+          <li>Niche e-commerce brands</li>
+          <li>AI-driven experiments</li>
+          <li>Community platforms</li>
           <li>Architecture that teams can live with</li>
         </ul>
       </section>
@@ -30,8 +37,15 @@
       </section>
     </div>
     <div class="footer-meta">
-      <p>© {new Date().getFullYear()} Kevin Harder</p>
-      <p class="muted">25+ years of code. Retro-futurism vibes, principal-engineer pragmatism</p>
+      <div class="footer-meta-left">
+        <p>&copy; {new Date().getFullYear()} Harder Labs LLC. All rights reserved.</p>
+        <p class="muted">A Texas limited liability company &middot; Austin, TX</p>
+      </div>
+      <div class="footer-legal-links">
+        {LEGAL_LINKS.map((link) => (
+          <a href={link.href}>{link.label}</a>
+        ))}
+      </div>
     </div>
   </div>
 </footer>
@@ -147,6 +161,29 @@
 
   .footer-meta p {
     font-size: 0.82rem;
+  }
+
+  .footer-meta-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .footer-legal-links {
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  .footer-legal-links a {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+
+  .footer-legal-links a:hover {
+    color: var(--accent-primary);
+    border-bottom-color: var(--accent-primary);
   }
 
   @media (max-width: 960px) {
