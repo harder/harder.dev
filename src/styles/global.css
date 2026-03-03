@@ -163,12 +163,33 @@ img {
   max-width: 58ch;
   font-size: clamp(1rem, 0.92rem + 0.5vw, 1.24rem);
 }
+.hero-subtitle-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.hero-subtitle-copy {
+  flex: 1 1 36rem;
+  min-width: 16rem;
+}
+.hero-logo {
+  flex: 0 0 auto;
+  width: 128px;
+  height: 128px;
+}
 
 .hero-actions {
   margin-top: 1.5rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
+}
+@media (max-width: 640px) {
+  .hero-logo {
+    width: 96px;
+    height: 96px;
+  }
 }
 
 .muted {

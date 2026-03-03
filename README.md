@@ -1,7 +1,10 @@
 # harder.dev
-This is the repo for the Harder.dev web site.
 
-This web site is the online home of Harder Labs, LLC - based in Austin, Texas.
+This is the repo for the [Harder.dev](https://harder.dev) web site.
+
+<img src="https://harder.dev/img/logo_128.png" alt="Harder Labs Logo" width="128" style="float:right; margin: 0 0 1rem 1rem;" />
+
+This web site is the online home of Harder Labs, LLC, an engineering-led product studio and venture laboratory. We build and operate online communities, diverse e-commerce brands, and software experiments. 25+ years of engineering experience, a bias toward shipping fast, and a genuine curiosity about discovering and using the technologies of tomorrow.
 
 ## App Stack
 
