@@ -1,10 +1,7 @@
 # harder.dev
+This is the repo for the Harder.dev web site.
 
-Retro-futuristic site built with Astro.  
-Current architecture is intentionally minimal and dynamic:
-
-- high-level principles pages
-- hybrid AI-powered live content feed (browser AI first, Cloudflare Worker fallback)
+This web site is the online home of Harder Labs, LLC - based in Austin, Texas.
 
 ## App Stack
 

@@ -1,7 +1,3 @@
-# Harder.DEV
-This is the repo for the Harder.DEV web site.
-
-Built with Astro and TypeScript.
 
 Trusted feeds are enabled via Astro dynamic islands and CloudFlare workers.
 I leverage in-browser AI capabilities (Prompt AI for Chrome/Edge, or Apple Intelligence for Safari) to do the content processing for each content item if possible, or utilize a CloudFlare worker otherwise.
