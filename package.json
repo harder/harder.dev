@@ -3,22 +3,28 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check",
+    "check": "astro check && npm run check:worker",
+    "check:worker": "tsc -p worker/tsconfig.json --noEmit",
     "format": "prettier --write .",
     "worker:deploy": "npx wrangler deploy --config worker/wrangler.toml"
   },
   "dependencies": {
-    "@astrojs/preact": "^4.0.0",
-    "@astrojs/sitemap": "^3.6.0",
-    "astro": "^5.0.0",
-    "preact": "^10.26.0"
+    "@astrojs/preact": "^5.0.0",
+    "@astrojs/sitemap": "^3.7.1",
+    "astro": "^6.0.2",
+    "preact": "^10.29.0"
   },
   "devDependencies": {
-    "prettier": "^3.5.0",
-    "typescript": "^5.8.0"
+    "@astrojs/check": "^0.9.7",
+    "@cloudflare/workers-types": "^4.20260304.0",
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3"
   }
 }

@@ -2,6 +2,8 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import NeonCard from "@/components/NeonCard.astro";
 import TerminalPanel from "@/components/TerminalPanel.astro";
+import { Image } from "astro:assets";
+import logoMark from "@/assets/brand/logo_128.png";
 ---
 
 <BaseLayout title="About | Harder Labs" description="About Harder Labs — an Austin, Texas company building niche e-commerce brands, software experiments, and open tools.">
@@ -15,14 +17,12 @@ import TerminalPanel from "@/components/TerminalPanel.astro";
           We build and operate online communities, diverse e-commerce brands, and software experiments.
           We keep notes on what we build, what can be improved, and the lessons learned along the way.
         </p>
-        <img
+        <Image
           class="hero-logo"
-          src="/img/logo_128.png"
+          src={logoMark}
           alt="Harder Labs logo"
           width="128"
           height="128"
-          loading="eager"
-          decoding="async"
         />
       </div>
     </div>
@@ -113,11 +113,10 @@ import TerminalPanel from "@/components/TerminalPanel.astro";
           </p>
         </NeonCard>
         <NeonCard>
-          <h3 style="font-size:1.1rem;">Feed + AI Processing Pipeline</h3>
+          <h3 style="font-size:1.1rem;">Typed Content Layer</h3>
           <p style="margin-top:0.55rem;">
-            Trusted feeds are summarized with local browser AI when possible, or
-            <a class="inline-link" href="https://developers.cloudflare.com/workers/" target="_blank" rel="noreferrer noopener">Cloudflare Workers</a>.
-            Pretty amazing what can be done without a dedicated server these days.
+            Structured site data now lives in Astro collections with schema validation instead of hand-maintained arrays in page files.
+            It keeps content centralized, type-safe, and easier to extend as the site grows.
           </p>
         </NeonCard>
       </div>

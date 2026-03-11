@@ -32,7 +32,7 @@ body {
 }
 
 body {
-  font-family: "Space Grotesk", "Avenir Next", "Segoe UI", sans-serif;
+  font-family: var(--font-space-grotesk), "Avenir Next", "Segoe UI", sans-serif;
   color: var(--text-main);
   background:
     radial-gradient(circle at 20% 15%, rgba(76, 242, 200, 0.16), transparent 40%),
@@ -84,19 +84,20 @@ h4 {
 
 h1,
 h2 {
-  font-family: "Chakra Petch", "Space Grotesk", sans-serif;
+  font-family: var(--font-chakra-petch), var(--font-space-grotesk), sans-serif;
   letter-spacing: 0.02em;
 }
 
 code,
 pre,
 kbd {
-  font-family: "IBM Plex Mono", "SF Mono", "Menlo", monospace;
+  font-family: var(--font-ibm-plex-mono), "SF Mono", "Menlo", monospace;
 }
 
 img {
   display: block;
   max-width: 100%;
+  height: auto;
 }
 
 .container {
@@ -176,7 +177,7 @@ img {
 .hero-logo {
   flex: 0 0 auto;
   width: 128px;
-  height: 128px;
+  height: auto;
 }
 
 .hero-actions {
@@ -188,7 +189,7 @@ img {
 @media (max-width: 640px) {
   .hero-logo {
     width: 96px;
-    height: 96px;
+    height: auto;
   }
 }
 

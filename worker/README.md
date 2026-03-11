@@ -1,6 +1,8 @@
+# harder.dev Worker
 
-Trusted feeds are enabled via Astro dynamic islands and CloudFlare workers.
-I leverage in-browser AI capabilities (Prompt AI for Chrome/Edge, or Apple Intelligence for Safari) to do the content processing for each content item if possible, or utilize a CloudFlare worker otherwise.
+Trusted feeds are surfaced through an Astro/Preact island in the main site and backed by this Cloudflare Worker when browser-local processing is unavailable or upstream fetching needs help with CORS and caching.
+
+The frontend tries local/browser AI first, then falls back to this Worker for summarization.
 
 
 ## Cloudflare Worker Details (Hybrid Feed + AI)
@@ -15,11 +17,29 @@ This Worker provides:
 It includes:
 
 - CORS headers for frontend usage
-- exponential backoff + retry
+- exponential backoff and retry
 - optional KV metadata caching for conditional fetch (`ETag`, `Last-Modified`)
 - edge caching via `caches.default`
 - trusted host allowlists for RSS/proxy endpoints
 - Workers AI model fallback chain (starting with `@cf/meta/llama-3.3-70b-instruct-awq`)
+- shared feed configuration imported from `../shared/feed-config.ts`
+- standalone type-checking through `worker/tsconfig.json`
+
+## Local validation
+
+From the repository root:
+
+```bash
+npm run check:worker
+```
+
+This runs:
+
+```bash
+tsc -p worker/tsconfig.json --noEmit
+```
+
+Node 22+ is required in the repository root because the main Astro app now targets Astro 6.
 
 ### Deploy
 
@@ -49,3 +69,10 @@ PUBLIC_AI_WORKER_URL=https://your-worker.your-subdomain.workers.dev
 ```
 
 The signals widget automatically uses this endpoint and falls back to public client-side fetching if unavailable.
+
+## Related app files
+
+- `src/components/islands/LiveSignalsWidget.tsx`
+- `src/lib/feed-sources.ts`
+- `src/lib/universal-ai.ts`
+- `shared/feed-config.ts`
